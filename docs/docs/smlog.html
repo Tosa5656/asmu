@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smlog — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>smlog</h1>
+        <p class="lead">Утилита и API для чтения, поиска и мониторинга системных логов (файлы и systemd journal).</p>
+
+        <h2>Назначение</h2>
+        <p>Чтение и мониторинг логов, в том числе journald. Поиск по ключевым словам, топ IP и пользователей, готовые отчёты (безопасность, система), мониторинг в реальном времени с правилами.</p>
+
+        <h2>Исходники</h2>
+        <ul>
+            <li><code>smlog/smlog.cpp</code> — точка входа и команды (list, read, search, journal, top-ips, report, monitor).</li>
+            <li><code>smlog/SystemLogger.cpp</code>, <code>SystemLogger.h</code> — работа с файловыми логами и journal.</li>
+        </ul>
+
+        <h2>Команды CLI</h2>
+        <table>
+            <thead>
+                <tr><th>Команда</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>smlog help</code></td><td>Справка</td></tr>
+                <tr><td><code>smlog list</code></td><td>Доступные логи</td></tr>
+                <tr><td><code>smlog read &lt;файл&gt; [N]</code></td><td>Чтение последних N строк (например /var/log/syslog 100)</td></tr>
+                <tr><td><code>smlog search "строка" &lt;файл&gt;</code></td><td>Поиск по ключевым словам</td></tr>
+                <tr><td><code>smlog journal &lt;unit&gt; [N]</code></td><td>Журнал systemd (например sshd 50)</td></tr>
+                <tr><td><code>smlog top-ips &lt;файл&gt; [N]</code></td><td>Топ IP по логу</td></tr>
+                <tr><td><code>smlog report security</code></td><td>Отчёт по безопасности</td></tr>
+                <tr><td><code>smlog monitor</code></td><td>Мониторинг в реальном времени (Ctrl+C — выход)</td></tr>
+            </tbody>
+        </table>
+
+        <h2>API (smlog_api.h)</h2>
+        <p>Класс <code>SecurityManager::LogAnalyzer</code>. Типы: <code>LogEntry</code>, <code>LogFilter</code>. Результаты — <code>LogResult&lt;T&gt;</code> с кодами <code>LogError</code>.</p>
+        <p>Методы: чтение файла логов, поиск по файлу, работа с journal, отчёты. Подробности в заголовке <code>api/include/smlog_api.h</code>.</p>
+    </main>
+</body>
+</html>

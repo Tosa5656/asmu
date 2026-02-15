@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smssh — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>smssh</h1>
+        <p class="lead">Утилита и API для анализа конфигурации SSH, обнаружения атак и генерации ключей.</p>
+
+        <h2>Назначение</h2>
+        <p>Проверка и усиление настроек SSH-сервера, разбор логов и поиск признаков атак (brute force, dictionary, аномалии по GeoIP).</p>
+
+        <h2>Исходники</h2>
+        <ul>
+            <li><code>smssh/smssh.cpp</code> — точка входа, команды (help, analyze, generate, check, apply, show, monitor, parse-log, gen-key, post-config).</li>
+            <li><code>smssh/sshConfig.cpp</code>, <code>sshConfig.h</code> — загрузка и разбор sshd_config, анализ безопасности, генерация безопасного конфига.</li>
+            <li><code>smssh/sshAttackDetector.cpp</code>, <code>sshAttackDetector.h</code> — парсинг логов SSH и детекция атак.</li>
+            <li><code>smssh/smssh_config.h</code> — константы конфигурации.</li>
+        </ul>
+
+        <h2>Команды CLI</h2>
+        <table>
+            <thead>
+                <tr><th>Команда</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>smssh help</code></td><td>Справка по командам</td></tr>
+                <tr><td><code>smssh analyze [путь_конфига]</code></td><td>Анализ безопасности SSH-конфигурации</td></tr>
+                <tr><td><code>smssh generate [путь_вывода]</code></td><td>Генерация безопасного sshd_config</td></tr>
+                <tr><td><code>smssh check [путь_конфига]</code></td><td>Проверка текущей конфигурации</td></tr>
+                <tr><td><code>smssh apply [путь_конфига]</code></td><td>Применение рекомендаций (с бэкапом)</td></tr>
+                <tr><td><code>smssh show [путь_конфига]</code></td><td>Вывод текущей конфигурации</td></tr>
+                <tr><td><code>smssh monitor</code></td><td>Мониторинг SSH-атак в реальном времени</td></tr>
+                <tr><td><code>smssh parse-log &lt;путь_лога&gt;</code></td><td>Разбор лога и обнаружение атак</td></tr>
+                <tr><td><code>smssh gen-key [имя_ключа]</code></td><td>Генерация SSH-ключей хоста</td></tr>
+                <tr><td><code>smssh post-config</code></td><td>Шаги пост-конфигурации сервера</td></tr>
+            </tbody>
+        </table>
+
+        <h2>API (smssh_api.h)</h2>
+        <p>Класс <code>SecurityManager::SSHSecurity</code>. Типы: <code>SSHConfigIssue</code>, <code>SSHConnectionAttempt</code>, <code>SSHAttackAlert</code>, <code>SSHSecurityRecommendation</code>, <code>SSHSecurityReport</code>. Результаты обёрнуты в <code>SSHResult&lt;T&gt;</code> с кодами <code>SSHError</code>.</p>
+        <p>Основные методы: <code>analyzeConfiguration()</code>, <code>applySecurityHardening()</code>, <code>generateSecureConfig()</code>, <code>detectAttacks()</code>, <code>monitorAttacks()</code>, <code>stopMonitoring()</code>, <code>generateKeyPair()</code>, <code>getServerStatus()</code>, <code>testConnectivity()</code>.</p>
+    </main>
+</body>
+</html>

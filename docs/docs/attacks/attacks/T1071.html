@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MITRE ATT&CK: T1071 - Application Layer Protocol</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../attacks.css">
+</head>
+<body>
+    <nav class="attacks-nav">
+        <a href="../../index.html" class="brand">ASMU</a>
+        <a href="../index.html">Документация</a>
+        <a href="../index.html">Список атак</a>
+        <a href="https://attack.mitre.org/techniques/T1071/" target="_blank" rel="noopener">MITRE T1071</a>
+    </nav>
+    <div class="attacks-container">
+    <h1>T1071 - Application Layer Protocol</h1>
+
+    <h2>Описание атаки</h2>
+    <p>Использование стандартных прикладных протоколов (HTTP, HTTPS, FTP, SMTP и т.д.) для связи с серверами управления и контроля (C2). Злоумышленники маскируют вредоносный трафик под легитимные протоколы, что затрудняет его обнаружение традиционными средствами безопасности.</p>
+
+    <h2>Принцип работы</h2>
+    <ul>
+        <li>HTTP/HTTPS для C2-коммуникаций</li>
+        <li>FTP для эксфильтрации данных</li>
+        <li>SMTP для доставки команд</li>
+        <li>Туннелирование через DNS over HTTPS (DoH)</li>
+        <li>Злоупотребление протоколами для обхода фильтров</li>
+        <li>Использование CDN для проксирования трафика</li>
+    </ul>
+
+    <h2>Ссылка на MITRE ATT&CK</h2>
+    <p><a href="https://attack.mitre.org/techniques/T1071/" target="_blank">T1071 - Application Layer Protocol</a></p>
+
+    <h2>Защита с помощью ASMU</h2>
+
+    <h3>smnet - Сетевой мониторинг</h3>
+    <ul>
+        <li><strong>Анализ трафика HTTP/HTTPS:</strong> smnet connection | grep ":80\|:443"</li>
+        <li><strong>Мониторинг необычных соединений:</strong> smnet stats по портам</li>
+        <li><strong>Обнаружение паттернов C2:</strong> анализ частоты запросов к подозрительным доменам</li>
+        <li><strong>Мониторинг DNS:</strong> smnet connection для анализа DoH</li>
+    </ul>
+
+    <h3>smlog - Анализ логов</h3>
+    <ul>
+        <li><strong>Анализ логов веб-сервера:</strong> smlog search "POST|GET" /var/log/apache2/access.log</li>
+        <li><strong>Мониторинг SMTP-трафика:</strong> smlog read /var/log/mail.log</li>
+        <li><strong>Отслеживание подозрительных запросов:</strong> smlog search "powershell|cmd|bash" /var/log/nginx/access.log</li>
+        <li><strong>Логи DNS:</strong> smlog search "query|A|AAAA" /var/log/named/query.log</li>
+    </ul>
+
+    <h3>smssh - Безопасность SSH</h3>
+    <ul>
+        <li><strong>Мониторинг HTTP-туннелирования:</strong> smssh monitor</li>
+        <li><strong>Защита от злоупотребления протоколами:</strong> smssh apply /etc/ssh/sshd_config</li>
+        <li><strong>Анализ сетевой активности:</strong> smssh parse-log /var/log/auth.log</li>
+    </ul>
+
+    <h2>Рекомендации</h2>
+    <ul>
+        <li>Использование SSL/TLS inspection</li>
+        <li>Настройка WAF с правилами для обнаружения C2</li>
+        <li>Мониторинг HTTPS-трафика на аномалии</li>
+        <li>Использование DLP для предотвращения эксфильтрации данных</li>
+        <li>Настройка ограничения скорости (rate limiting) для конечных точек API</li>
+        <li>Регулярный анализ паттернов трафика</li>
+        <li>Использование CDN для легитимного трафика</li>
+        <li>Мониторинг алгоритмов генерации доменов (DGA)</li>
+    </ul>
+
+    <h2>Пример обнаружения</h2>
+    <pre>
+$ smnet connection | grep -E "(:80|:443)" | head -10
+tcp  192.168.1.100:443   -> 203.0.113.1:443    ESTABLISHED (подозрительный домен)
+tcp  192.168.1.100:80    -> 198.51.100.1:80    ESTABLISHED (необычный трафик)
+tcp  192.168.1.100:443   -> 192.0.2.1:443      ESTABLISHED (высокая частота)
+
+$ smlog search "POST" /var/log/apache2/access.log | tail -5
+[2026-01-04 18:10:15] 192.168.1.100 - POST /api/cmd HTTP/1.1 200
+[2026-01-04 18:10:18] 192.168.1.100 - POST /api/data HTTP/1.1 200
+[2026-01-04 18:10:22] 192.168.1.100 - POST /api/exfil HTTP/1.1 200
+[2026-01-04 18:11:01] 192.168.1.100 - POST /api/beacon HTTP/1.1 200
+
+$ smnet stats | grep -E "(HTTP|HTTPS|DNS)"
+HTTP запросов: 1250 (норма: 800)
+HTTPS запросов: 2100 (высокое значение: подозрительно на C2)
+DNS запросов: 3500 (возможное туннелирование DoH)
+    </pre>
+    </div>
+</body>
+</html>

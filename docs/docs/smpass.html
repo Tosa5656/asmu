@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smpass — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>smpass</h1>
+        <p class="lead">Утилита и API для шифрованного хранения паролей и хэширования (AES256, SHA256).</p>
+
+        <h2>Назначение</h2>
+        <p>Локальное хранение паролей с шифрованием и хэшированием. Хранение с AES256, SHA256 для хэшей. Данные в <code>~/.asmu/storage/</code>.</p>
+
+        <h2>Исходники</h2>
+        <ul>
+            <li><code>smpass/smpass.cpp</code> — точка входа (add-password, delete-password, hash-sha256, hash-aes256).</li>
+            <li><code>smpass/storage.cpp</code>, <code>storage.h</code> — работа с хранилищем записей.</li>
+            <li><code>smpass/aes256.h</code>, <code>sha256.h</code> — крипто-примитивы (часто поверх OpenSSL).</li>
+        </ul>
+
+        <h2>Команды CLI</h2>
+        <table>
+            <thead>
+                <tr><th>Команда</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>smpass help</code></td><td>Справка</td></tr>
+                <tr><td><code>smpass add-password</code></td><td>Интерактивно добавить запись (сервис, логин, пароль)</td></tr>
+                <tr><td><code>smpass delete-password</code></td><td>Удалить запись</td></tr>
+                <tr><td><code>smpass hash-sha256 "строка"</code></td><td>Вывести SHA256-хэш строки</td></tr>
+                <tr><td><code>smpass hash-aes256 "строка"</code></td><td>Шифрование строки AES256 (с выводом в формате хранилища)</td></tr>
+            </tbody>
+        </table>
+
+        <h2>API (smpass_api.h)</h2>
+        <p>Класс <code>SecurityManager::PasswordManager</code>. Типы: <code>HashAlgorithm</code> (SHA256, AES256), <code>PasswordEntry</code>. Результаты — <code>PasswordResult&lt;T&gt;</code> с кодами <code>PasswordError</code>.</p>
+        <p>Методы: <code>hashString()</code>, <code>addPassword()</code>, <code>getPassword()</code>, <code>deletePassword()</code>, <code>listEntries()</code> и др. Подробности в <code>api/include/smpass_api.h</code>.</p>
+    </main>
+</body>
+</html>

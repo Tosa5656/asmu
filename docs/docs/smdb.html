@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smdb — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>smdb</h1>
+        <p class="lead">Утилита и API для работы с базой знаний MITRE ATT&CK: описание атак и рекомендации по защите с помощью ASMU.</p>
+
+        <h2>Назначение</h2>
+        <p>Справочник техник с описаниями и подсказками, какими утилитами ASMU можно прикрыться. Список и поиск по техникам, описание и рекомендации по защите, указание инструментов (smssh, smlog и др.). Документация по атакам — HTML в <code>doc/attacks/</code>, при установке — в <code>/usr/share/doc/asmu/attacks/</code>.</p>
+
+        <h2>Исходники</h2>
+        <ul>
+            <li><code>smdb/smdb.cpp</code> — точка входа и логика: чтение HTML из doc/attacks/, извлечение заголовков и контента (getHtmlTitle, getHtmlContent), поиск по ключевым словам, вывод списка атак и рекомендаций (list, search, show, tools).</li>
+        </ul>
+
+        <h2>Команды CLI</h2>
+        <table>
+            <thead>
+                <tr><th>Команда</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>smdb help</code></td><td>Справка</td></tr>
+                <tr><td><code>smdb list</code></td><td>Список всех атак (ID и название)</td></tr>
+                <tr><td><code>smdb search &lt;keyword&gt;</code></td><td>Поиск по ключевым словам</td></tr>
+                <tr><td><code>smdb show &lt;attack_id&gt;</code></td><td>Подробная информация об атаке (например T1110)</td></tr>
+                <tr><td><code>smdb tools &lt;attack_id&gt;</code></td><td>Команды утилит ASMU для защиты от атаки</td></tr>
+            </tbody>
+        </table>
+
+        <h2>API (smdb_api.h)</h2>
+        <p>Класс <code>SecurityManager::AttackDatabase</code>. Типы: <code>AttackInfo</code>, <code>ProtectionGuidance</code>, <code>AttackSearchResult</code>, <code>DatabaseStats</code>. Результаты — <code>DatabaseResult&lt;T&gt;</code> с кодами <code>DatabaseError</code>.</p>
+        <p>Методы: <code>searchAttacks()</code>, <code>getAttackInfo()</code>, <code>getProtectionGuidance()</code>, <code>getAttacksByTactic()</code>, <code>getAttacksByPlatform()</code>, <code>listAllAttacks()</code>, <code>getDatabaseStats()</code>, <code>exportAttackInfo()</code>, <code>getRelatedAttacks()</code>, <code>getMitigationStrategies()</code>.</p>
+    </main>
+</body>
+</html>

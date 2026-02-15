@@ -1,11 +1,269 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ASMU</title>
-    </head>
-    <body>
-        
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASMU — Advanced Security Manager Utils</title>
+    <meta name="description" content="Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности. SSH, логи, пароли, сеть, база знаний MITRE ATT&CK. C++, OpenSSL, libpcap.">
+    <meta property="og:title" content="ASMU — Advanced Security Manager Utils">
+    <meta property="og:description" content="Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности без лишней магии.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particles" class="particles"></canvas>
+    <div class="grid-bg"></div>
+
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">
+                <span class="logo-text">ASMU</span>
+                <span class="logo-pulse"></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">О проекте</a></li>
+                <li><a href="#utils">Утилиты</a></li>
+                <li><a href="#api">API</a></li>
+                <li><a href="#install">Установка</a></li>
+                <li><a href="docs/index.html">Документация</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <h1 class="hero-title">
+                <span class="hero-title-line">Advanced Security</span>
+                <span class="hero-title-line accent">Manager Utils</span>
+            </h1>
+            <p class="hero-desc">
+                Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности без лишней магии.
+            </p>
+            <div class="hero-stats reveal">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-label">утилит</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">% C++</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="1">0</span>
+                    <span class="stat-label">команда</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="https://github.com/Tosa5656/asmu" class="btn btn-primary" target="_blank" rel="noopener">
+                    <span>GitHub</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="currentColor"/></svg>
+                </a>
+                <a href="#install" class="btn btn-outline">Установка</a>
+            </div>
+            <div class="hero-scroll">
+                <div class="scroll-indicator"></div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2 class="section-title reveal">
+                <span class="title-line"></span>
+                <span>О проекте</span>
+            </h2>
+            <p class="section-text reveal">
+                Пять консольных утилит, которые закрывают типичные задачи по безопасности: SSH, логи, пароли, сеть и справочник по атакам. У каждой команды есть <code class="inline-code">help</code> — просто запустите <code class="inline-code">smssh help</code>, <code class="inline-code">smlog help</code> и т.д.
+            </p>
+            <div class="utils-table reveal">
+                <div class="table-row table-header">
+                    <div class="table-cell">Утилита</div>
+                    <div class="table-cell">Назначение</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><code class="inline-code">smssh</code></div>
+                    <div class="table-cell">Безопасность SSH: конфиг, ключи, мониторинг атак</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><code class="inline-code">smlog</code></div>
+                    <div class="table-cell">Логи: чтение, поиск, отчёты, мониторинг в реальном времени</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><code class="inline-code">smpass</code></div>
+                    <div class="table-cell">Пароли: хранение с AES256, хэши SHA256</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><code class="inline-code">smnet</code></div>
+                    <div class="table-cell">Сеть: порты, соединения, трафик, статистика</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><code class="inline-code">smdb</code></div>
+                    <div class="table-cell">База MITRE ATT&CK: описание атак и рекомендации по защите</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="utils" class="section section-dark">
+            <h2 class="section-title reveal">
+                <span class="title-line"></span>
+                <span>Утилиты</span>
+            </h2>
+            <div class="utils-grid">
+                <article class="card reveal" data-tilt>
+                    <div class="card-icon">🔐</div>
+                    <h3 class="card-title">smssh</h3>
+                    <p class="card-desc">Проверка и усиление настроек SSH-сервера, разбор логов и поиск признаков атак. Анализ конфигурации, генерация безопасного конфига, мониторинг brute force и dictionary-атак.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Анализ конфига</span>
+                        <span class="feature-tag">Мониторинг атак</span>
+                        <span class="feature-tag">Генерация ключей</span>
+                    </div>
+                    <div class="code-wrap">
+                        <code class="card-cmd" data-copy="smssh analyze · smssh monitor · smssh gen-key">smssh analyze · smssh monitor · smssh gen-key</code>
+                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    </div>
+                </article>
+                <article class="card reveal" data-tilt>
+                    <div class="card-icon">📋</div>
+                    <h3 class="card-title">smlog</h3>
+                    <p class="card-desc">Чтение, поиск и мониторинг логов, в том числе journald. Файловые логи и systemd journal, поиск по ключевым словам, топ IP и пользователей, готовые отчёты.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">systemd journal</span>
+                        <span class="feature-tag">Поиск</span>
+                        <span class="feature-tag">Отчёты</span>
+                    </div>
+                    <div class="code-wrap">
+                        <code class="card-cmd" data-copy="smlog read · smlog search · smlog monitor">smlog read · smlog search · smlog monitor</code>
+                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    </div>
+                </article>
+                <article class="card reveal" data-tilt>
+                    <div class="card-icon">🔑</div>
+                    <h3 class="card-title">smpass</h3>
+                    <p class="card-desc">Локальное хранение паролей с шифрованием и хэшированием. Хранение с AES256, SHA256 для хэшей. Данные в <code class="inline-code">~/.asmu/storage/</code>.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">AES256</span>
+                        <span class="feature-tag">SHA256</span>
+                        <span class="feature-tag">Безопасное хранение</span>
+                    </div>
+                    <div class="code-wrap">
+                        <code class="card-cmd" data-copy="smpass add-password · smpass hash-sha256">smpass add-password · smpass hash-sha256</code>
+                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    </div>
+                </article>
+                <article class="card reveal" data-tilt>
+                    <div class="card-icon">🌐</div>
+                    <h3 class="card-title">smnet</h3>
+                    <p class="card-desc">Сканирование портов, активные соединения и статистика по интерфейсам. Список соединений TCP/UDP и процессов, мониторинг трафика на интерфейсе (pcap).</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Сканирование портов</span>
+                        <span class="feature-tag">Мониторинг</span>
+                        <span class="feature-tag">Статистика</span>
+                    </div>
+                    <div class="code-wrap">
+                        <code class="card-cmd" data-copy="smnet scan · smnet connections · smnet stats">smnet scan · smnet connections · smnet stats</code>
+                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    </div>
+                </article>
+                <article class="card reveal card-wide" data-tilt>
+                    <div class="card-icon">📚</div>
+                    <h3 class="card-title">smdb</h3>
+                    <p class="card-desc">Справочник техник MITRE ATT&CK с описаниями и подсказками, какими утилитами ASMU можно прикрыться. Список и поиск по техникам, описание и рекомендации по защите, указание инструментов ASMU.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">MITRE ATT&CK</span>
+                        <span class="feature-tag">Поиск</span>
+                        <span class="feature-tag">Рекомендации</span>
+                    </div>
+                    <div class="code-wrap">
+                        <code class="card-cmd" data-copy="smdb list · smdb search <keyword> · smdb tools <attack_id>">smdb list · smdb search &lt;keyword&gt; · smdb tools &lt;attack_id&gt;</code>
+                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="api" class="section">
+            <h2 class="section-title reveal">
+                <span class="title-line"></span>
+                <span>API</span>
+            </h2>
+            <p class="section-text reveal">
+                Если хочется вызывать те же возможности из кода на C++ — есть единый API и статическая библиотека <code class="inline-code">libasmu.a</code>. Сборка библиотеки: <code class="inline-code">make libasmu.a</code>.
+            </p>
+            <div class="api-links reveal">
+                <a href="https://github.com/Tosa5656/asmu/tree/master/api" class="api-link" target="_blank" rel="noopener">
+                    <div class="api-link-icon">📖</div>
+                    <div class="api-link-content">
+                        <h3>Описание API</h3>
+                        <p>Документация и примеры использования</p>
+                    </div>
+                    <div class="api-link-arrow">→</div>
+                </a>
+                <a href="https://github.com/Tosa5656/asmu/tree/master/doc" class="api-link" target="_blank" rel="noopener">
+                    <div class="api-link-icon">📄</div>
+                    <div class="api-link-content">
+                        <h3>Сгенерированная документация</h3>
+                        <p>После <code class="inline-code">make doc</code></p>
+                    </div>
+                    <div class="api-link-arrow">→</div>
+                </a>
+            </div>
+        </section>
+
+        <section id="install" class="section section-dark">
+            <h2 class="section-title reveal">
+                <span class="title-line"></span>
+                <span>Установка</span>
+            </h2>
+            <p class="section-text reveal">Требования: Linux, компилятор с C++20, OpenSSL, libpcap. Опционально: MaxMind GeoLite2 для GeoIP в smssh.</p>
+            <ul class="requirements reveal">
+                <li>Linux</li>
+                <li>Компилятор C++20</li>
+                <li>OpenSSL</li>
+                <li>libpcap</li>
+                <li>MaxMind GeoLite2</li>
+            </ul>
+            <div class="install-block reveal">
+                <div class="install-code-wrap">
+                    <pre class="install-code" id="install-pre"><code>git clone https://github.com/Tosa5656/asmu
+cd asmu
+make
+make check
+make doc
+sudo make install</code></pre>
+                    <button type="button" class="copy-btn copy-btn-install" id="install-copy" aria-label="Копировать">Копировать</button>
+                </div>
+            </div>
+            <div class="install-extra reveal">
+                <p class="section-text">Для мониторинга SSH через systemd:</p>
+                <div class="install-code-wrap">
+                    <pre class="install-code"><code>sudo make install-systemd
+systemctl enable smssh
+systemctl start smssh</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>
+            <span class="footer-brand">ASMU</span> Advanced Security Manager Utils ·
+            <a href="https://github.com/Tosa5656/asmu" target="_blank" rel="noopener">GitHub</a> ·
+            <a href="https://github.com/Tosa5656/asmu/tree/master/doc" target="_blank" rel="noopener">Документация</a> ·
+            <a href="https://github.com/Tosa5656/asmu/tree/master/api" target="_blank" rel="noopener">API</a> ·
+            GPL-3.0
+        </p>
+    </footer>
+
+    <a href="#" class="back-top" id="back-top" aria-label="Наверх">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 4L4 10h3v6h6v-6h3L10 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
+</body>
 </html>

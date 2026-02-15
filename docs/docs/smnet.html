@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smnet — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>smnet</h1>
+        <p class="lead">Утилита и API для сканирования портов, мониторинга соединений и статистики по интерфейсам.</p>
+
+        <h2>Назначение</h2>
+        <p>Список соединений (TCP/UDP) и процессов, мониторинг трафика на интерфейсе (pcap), статистика по интерфейсам и протоколам.</p>
+
+        <h2>Исходники</h2>
+        <ul>
+            <li><code>smnet/smnet.cpp</code> — точка входа (scan, connections, stats).</li>
+            <li><code>smnet/portScanner.h</code> — сканирование портов.</li>
+            <li><code>smnet/trafficMonitor.h</code> — мониторинг трафика (pcap).</li>
+            <li><code>smnet/networkStats.h</code> — статистика по интерфейсам.</li>
+        </ul>
+
+        <h2>Команды CLI</h2>
+        <table>
+            <thead>
+                <tr><th>Команда</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>smnet help</code></td><td>Справка</td></tr>
+                <tr><td><code>smnet scan</code></td><td>Открытые порты и соединения</td></tr>
+                <tr><td><code>smnet connections [интерфейс]</code></td><td>Активные соединения (по умолчанию eth0)</td></tr>
+                <tr><td><code>smnet stats</code></td><td>Статистика интерфейсов</td></tr>
+            </tbody>
+        </table>
+
+        <h2>API (smnet_api.h)</h2>
+        <p>Класс <code>SecurityManager::NetworkMonitor</code>. Типы: <code>PortResult</code>, <code>ConnectionInfo</code>, <code>InterfaceInfo</code>. Результаты — <code>NetworkResult&lt;T&gt;</code> с кодами <code>NetworkError</code>.</p>
+        <p>Методы: <code>scanPorts()</code>, <code>getActiveConnections()</code>, <code>getInterfaceStats()</code> и др. Подробности в <code>api/include/smnet_api.h</code>.</p>
+    </main>
+</body>
+</html>

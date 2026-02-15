@@ -1,0 +1,200 @@
+:root {
+    --bg: #1e1e1e;
+    --bg-alt: #252526;
+    --bg-card: #2d2d30;
+    --border: #3c3c3c;
+    --text: #d4d4d4;
+    --text-muted: #858585;
+    --accent: #3794ff;
+    --accent-hover: #58a6ff;
+    --green: #4ec9b0;
+    --orange: #ce9178;
+    --radius: 8px;
+    --font: "JetBrains Mono", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    min-height: 100vh;
+}
+
+.docs-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 0;
+    overflow-y: auto;
+}
+
+.docs-nav .logo {
+    display: block;
+    padding: 0 1.25rem 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+}
+
+.docs-nav ul { list-style: none; }
+
+.docs-nav li { margin: 0; }
+
+.docs-nav a {
+    display: block;
+    padding: 0.5rem 1.25rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s, background 0.2s;
+}
+
+.docs-nav a:hover { color: var(--accent); background: rgba(55, 148, 255, 0.08); }
+
+.docs-nav .nav-section {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    padding: 1rem 1.25rem 0.35rem;
+}
+
+.docs-main {
+    margin-left: 260px;
+    padding: 2rem 3rem 4rem;
+    max-width: 900px;
+}
+
+.docs-main h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.docs-main .lead {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.docs-main h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent);
+}
+
+.docs-main h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--text);
+}
+
+.docs-main p { margin-bottom: 1rem; color: var(--text-muted); }
+
+.docs-main ul, .docs-main ol {
+    margin: 0 0 1rem 1.5rem;
+    color: var(--text-muted);
+}
+
+.docs-main li { margin-bottom: 0.35rem; }
+
+.docs-main pre, .docs-main code {
+    font-family: var(--font);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.docs-main code {
+    font-size: 0.88em;
+    padding: 0.15em 0.4em;
+    color: var(--green);
+}
+
+.docs-main pre {
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.docs-main pre code {
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--text);
+}
+
+.docs-main table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.docs-main th, .docs-main td {
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border: 1px solid var(--border);
+}
+
+.docs-main th {
+    background: var(--bg-card);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.docs-main td { color: var(--text-muted); }
+
+.docs-main .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.docs-main .card-link {
+    display: block;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.docs-main .card-link:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(55, 148, 255, 0.1);
+}
+
+.docs-main .card-link strong { color: var(--accent); }
+
+.docs-main .card-link span { font-size: 0.85rem; color: var(--text-muted); }
+
+.docs-main .anchor { color: var(--accent); text-decoration: none; }
+
+.docs-main .anchor:hover { text-decoration: underline; }
+
+@media (max-width: 900px) {
+    .docs-nav { width: 100%; height: auto; position: relative; }
+    .docs-main { margin-left: 0; padding: 1.5rem; }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MITRE ATT&CK — Документация по атакам | ASMU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="attacks.css">
+    <style>
+        .index-hero { text-align: center; padding: 3rem 1.5rem; border-bottom: 1px solid var(--border); }
+        .index-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .index-hero p { color: var(--text-muted); max-width: 540px; margin: 0 auto 2rem; }
+        .index-list { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .index-list h2 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-muted); }
+        .attack-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+        .attack-card {
+            display: block;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-decoration: none;
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .attack-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(55, 148, 255, 0.12); }
+        .attack-card .id { font-weight: 600; color: var(--accent); margin-bottom: 0.35rem; }
+        .attack-card .title { font-size: 0.95rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <nav class="attacks-nav">
+        <a href="../../index.html" class="brand">ASMU</a>
+        <a href="../index.html">Документация</a>
+        <a href="index.html">Атаки</a>
+    </nav>
+    <header class="index-hero">
+        <h1>MITRE ATT&CK</h1>
+        <p>Описание техник и рекомендации по защите с помощью утилит ASMU (smssh, smlog, smnet, smdb и др.).</p>
+    </header>
+    <section class="index-list">
+        <h2>Техники</h2>
+        <div class="attack-cards">
+            <a href="attacks/T1003.html" class="attack-card"><span class="id">T1003</span><span class="title">OS Credential Dumping</span></a>
+            <a href="attacks/T1016.html" class="attack-card"><span class="id">T1016</span><span class="title">System Network Configuration Discovery</span></a>
+            <a href="attacks/T1021.html" class="attack-card"><span class="id">T1021</span><span class="title">Remote Services</span></a>
+            <a href="attacks/T1046.html" class="attack-card"><span class="id">T1046</span><span class="title">Network Service Scanning</span></a>
+            <a href="attacks/T1059.html" class="attack-card"><span class="id">T1059</span><span class="title">Command and Scripting Interpreter</span></a>
+            <a href="attacks/T1071.html" class="attack-card"><span class="id">T1071</span><span class="title">Application Layer Protocol</span></a>
+            <a href="attacks/T1078.html" class="attack-card"><span class="id">T1078</span><span class="title">Valid Accounts</span></a>
+            <a href="attacks/T1082.html" class="attack-card"><span class="id">T1082</span><span class="title">System Information Discovery</span></a>
+            <a href="attacks/T1095.html" class="attack-card"><span class="id">T1095</span><span class="title">Non-Application Layer Protocol</span></a>
+            <a href="attacks/T1110.html" class="attack-card"><span class="id">T1110</span><span class="title">Brute Force</span></a>
+            <a href="attacks/T1133.html" class="attack-card"><span class="id">T1133</span><span class="title">External Remote Services</span></a>
+            <a href="attacks/T1190.html" class="attack-card"><span class="id">T1190</span><span class="title">Exploit Public-Facing Application</span></a>
+            <a href="attacks/T1573.html" class="attack-card"><span class="id">T1573</span><span class="title">Encrypted Channel</span></a>
+        </div>
+    </section>
+</body>
+</html>

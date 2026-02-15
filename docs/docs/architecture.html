@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архитектура — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>Архитектура</h1>
+        <p class="lead">Структура репозитория и связи между компонентами.</p>
+
+        <h2>Дерево каталогов</h2>
+        <pre><code>asmu/
+├── api/                    # C++ API
+│   ├── include/            # Заголовки (securitymanager.h, sm*_api.h)
+│   └── src/                # Реализация API
+├── argsparser/             # Парсер аргументов командной строки
+├── doc/                    # Документация (Doxygen, attacks)
+│   └── attacks/            # HTML-описания атак MITRE ATT&CK
+├── docs/                   # Документация для разработчиков (этот сайт)
+├── json/                   # nlohmann/json для работы с JSON
+├── logger/                 # Потокобезопасный логгер
+├── smdb/                   # Утилита и логика базы атак
+├── smlog/                  # Утилита и логика логов (SystemLogger)
+├── smnet/                  # Утилита и логика сети (portScanner, trafficMonitor)
+├── smpass/                 # Утилита и хранилище паролей (AES256, SHA256)
+├── smssh/                  # Утилита SSH (sshConfig, sshAttackDetector)
+└── test/                   # Тесты и тестовые данные</code></pre>
+
+        <h2>Поток данных</h2>
+        <ul>
+            <li><strong>Утилиты</strong> (smssh, smlog, smpass, smnet, smdb) — точки входа: парсят аргументы (argsparser), вызывают логику модуля, пишут в лог (logger) и выводят результат в stdout/stderr.</li>
+            <li><strong>API</strong> — те же возможности доступны через классы в namespace SecurityManager; реализация в api/src вызывает код из smssh, smlog и т.д. или дублирует логику там, где это необходимо.</li>
+            <li><strong>smdb</strong> читает HTML-файлы из doc/attacks/ и по ним строит поиск и выдачу рекомендаций; при установке документация копируется в /usr/share/doc/asmu/.</li>
+        </ul>
+
+        <h2>Зависимости модулей</h2>
+        <table>
+            <thead>
+                <tr><th>Модуль</th><th>Зависимости внутри проекта</th><th>Внешние</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>smssh</td><td>logger, sshConfig, sshAttackDetector</td><td>OpenSSL, опционально MaxMind GeoLite2</td></tr>
+                <tr><td>smlog</td><td>logger, SystemLogger</td><td>systemd (libsystemd для journal)</td></tr>
+                <tr><td>smpass</td><td>logger, storage, aes256, sha256</td><td>OpenSSL</td></tr>
+                <tr><td>smnet</td><td>logger, portScanner, trafficMonitor, networkStats</td><td>libpcap</td></tr>
+                <tr><td>smdb</td><td>logger, filesystem, regex</td><td>—</td></tr>
+                <tr><td>api</td><td>все перечисленные модули</td><td>те же, что и утилиты</td></tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

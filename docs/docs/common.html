@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Общие компоненты — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>Общие компоненты</h1>
+        <p class="lead">Logger и argsparser — общая инфраструктура, используемая утилитами и сборкой.</p>
+
+        <h2>Logger (logger/)</h2>
+        <p>Потокобезопасный синглтон для логирования. Запись в консоль и/или файл. Файл лога по умолчанию: <code>~/.asmu/logs/asmu.log</code> или <code>/tmp/asmu.log</code>, если HOME не задан.</p>
+        <h3>Файлы</h3>
+        <ul>
+            <li><code>logger/logger.h</code> — класс <code>Logger</code>, методы <code>logInfo</code>, <code>logWarning</code>, <code>logError</code>, <code>logDebug</code>, <code>setLogToFile</code>, <code>setLogToConsole</code>, <code>getLogFilePath</code>.</li>
+            <li><code>logger/logger.cpp</code> — реализация (если вынесена из заголовка).</li>
+        </ul>
+        <h3>Использование</h3>
+        <p>Доступ к экземпляру: <code>Logger::getInstance()</code>. Удобные функции обратной совместимости: <code>LogInfo(message)</code>, <code>LogWarning(message)</code>, <code>LogError(message)</code>, <code>LogDebug(message)</code>.</p>
+
+        <h2>Argsparser (argsparser/)</h2>
+        <p>Парсер аргументов командной строки. Используется утилитами для разбора <code>argc/argv</code> и выбора подкоманды (analyze, generate, list, search и т.д.).</p>
+        <h3>Файлы</h3>
+        <ul>
+            <li><code>argsparser/argsparser.h</code> — объявление парсера (класс или функции).</li>
+            <li><code>argsparser/argsparser.cpp</code> — реализация.</li>
+        </ul>
+        <p>Типичный сценарий: <code>argc &gt;= 2</code>, <code>argv[1]</code> — подкоманда; далее опции и аргументы в зависимости от команды.</p>
+    </main>
+</body>
+</html>

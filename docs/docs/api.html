@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ API — ASMU Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="docs-nav">
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <div class="nav-section">Обзор</div>
+        <ul>
+            <li><a href="index.html">Введение</a></li>
+            <li><a href="architecture.html">Архитектура</a></li>
+        </ul>
+        <div class="nav-section">Модули</div>
+        <ul>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
+        </ul>
+        <div class="nav-section">Общее</div>
+        <ul>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
+            <li><a href="api.html">C++ API</a></li>
+        </ul>
+        <div class="nav-section">Разделы</div>
+        <ul>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+        </ul>
+    </nav>
+    <main class="docs-main">
+        <h1>C++ API</h1>
+        <p class="lead">Программный доступ ко всем возможностям ASMU из кода на C++. Единая точка входа — <code>securitymanager.h</code>.</p>
+
+        <h2>Подключение и инициализация</h2>
+        <pre><code>#include &lt;securitymanager.h&gt;
+
+int main() {
+    SecurityManager::initialize();
+
+    SecurityManager::PasswordManager pwd_mgr;
+    auto hash = pwd_mgr.hashString("password", SecurityManager::HashAlgorithm::SHA256);
+
+    SecurityManager::NetworkMonitor net_mgr;
+    auto ports = net_mgr.scanPorts();
+
+    SecurityManager::AttackDatabase attack_db;
+    auto attacks = attack_db.searchAttacks("brute force");
+
+    SecurityManager::cleanup();
+    return 0;
+}</code></pre>
+
+        <h2>Структура API</h2>
+        <table>
+            <thead>
+                <tr><th>Заголовок</th><th>Класс</th><th>Назначение</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>smpass_api.h</code></td><td>PasswordManager</td><td>Хэширование и хранилище паролей</td></tr>
+                <tr><td><code>smnet_api.h</code></td><td>NetworkMonitor</td><td>Сканирование портов, соединения, статистика</td></tr>
+                <tr><td><code>smlog_api.h</code></td><td>LogAnalyzer</td><td>Чтение и поиск по логам</td></tr>
+                <tr><td><code>smssh_api.h</code></td><td>SSHSecurity</td><td>Анализ SSH-конфига и обнаружение атак</td></tr>
+                <tr><td><code>smdb_api.h</code></td><td>AttackDatabase</td><td>Поиск по MITRE ATT&CK и рекомендации</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Результаты и ошибки</h2>
+        <p>Каждый модуль возвращает обёртки вида <code>XxxResult&lt;T&gt;</code> с полями <code>code</code>, <code>message</code>, <code>data</code> и методом <code>success()</code>. Коды ошибок — перечисления <code>XxxError</code> (SUCCESS, FILE_NOT_FOUND, PERMISSION_DENIED и т.д.).</p>
+
+        <h2>Сборка</h2>
+        <pre><code>make libasmu.a   # статическая библиотека
+make all         # утилиты + библиотека</code></pre>
+        <p>Зависимости: OpenSSL, libpcap, libmaxminddb (опционально), C++20.</p>
+
+        <h2>Подробнее</h2>
+        <p>Полное описание API — в <code>api/README.md</code>. Сгенерированная Doxygen-документация — после <code>make doc</code> в <code>doc/api/html/</code>. Пример использования — <code>api/example.cpp</code>.</p>
+    </main>
+</body>
+</html>

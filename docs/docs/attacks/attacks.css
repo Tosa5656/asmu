@@ -1,0 +1,117 @@
+:root {
+    --bg: #1e1e1e;
+    --bg-alt: #252526;
+    --bg-card: #2d2d30;
+    --border: #3c3c3c;
+    --text: #d4d4d4;
+    --text-muted: #858585;
+    --accent: #3794ff;
+    --accent-hover: #58a6ff;
+    --green: #4ec9b0;
+    --orange: #ce9178;
+    --radius: 8px;
+    --font: "JetBrains Mono", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    min-height: 100vh;
+}
+
+.attacks-nav {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.attacks-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.attacks-nav a:hover { color: var(--accent); }
+
+.attacks-nav .brand { color: var(--accent); font-weight: 600; }
+
+.attacks-container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+}
+
+.attacks-container h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.attacks-container h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent);
+}
+
+.attacks-container h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.5rem;
+    color: var(--text);
+}
+
+.attacks-container p { margin-bottom: 0.75rem; color: var(--text-muted); }
+
+.attacks-container ul {
+    margin: 0 0 1rem 1.5rem;
+    color: var(--text-muted);
+}
+
+.attacks-container li { margin-bottom: 0.3rem; }
+
+.attacks-container pre {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    color: var(--green);
+}
+
+.attacks-container a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.attacks-container a:hover { text-decoration: underline; }
+
+.attacks-container strong { color: var(--text); }
+
+.mitre-badge {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    background: rgba(55, 148, 255, 0.15);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+}
