@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="docs-nav">
+    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">≡</button>
+    <div class="docs-nav-overlay" id="docs-nav-overlay"></div>
+    <nav class="docs-nav" id="docs-nav">
         <a href="../index.html" class="logo">ASMU</a>
         <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
         <div class="nav-section">Обзор</div>
@@ -66,8 +68,19 @@
         </table>
 
         <h2>API (smdb_api.h)</h2>
-        <p>Класс <code>SecurityManager::AttackDatabase</code>. Типы: <code>AttackInfo</code>, <code>ProtectionGuidance</code>, <code>AttackSearchResult</code>, <code>DatabaseStats</code>. Результаты — <code>DatabaseResult&lt;T&gt;</code> с кодами <code>DatabaseError</code>.</p>
+        <p>Класс <code>Asmu::AttackDatabase</code>. Типы: <code>AttackInfo</code>, <code>ProtectionGuidance</code>, <code>AttackSearchResult</code>, <code>DatabaseStats</code>. Результаты — <code>DatabaseResult&lt;T&gt;</code> с кодами <code>DatabaseError</code>.</p>
         <p>Методы: <code>searchAttacks()</code>, <code>getAttackInfo()</code>, <code>getProtectionGuidance()</code>, <code>getAttacksByTactic()</code>, <code>getAttacksByPlatform()</code>, <code>listAllAttacks()</code>, <code>getDatabaseStats()</code>, <code>exportAttackInfo()</code>, <code>getRelatedAttacks()</code>, <code>getMitigationStrategies()</code>.</p>
     </main>
+    <script>
+        (function() {
+            var t = document.getElementById("docs-nav-toggle");
+            var n = document.getElementById("docs-nav");
+            var o = document.getElementById("docs-nav-overlay");
+            if (t && n && o) {
+                t.addEventListener("click", function() { n.classList.toggle("is-open"); o.classList.toggle("is-open"); });
+                o.addEventListener("click", function() { n.classList.remove("is-open"); o.classList.remove("is-open"); });
+            }
+        })();
+    </script>
 </body>
 </html>

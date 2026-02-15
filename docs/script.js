@@ -258,6 +258,27 @@
         });
     });
 
+    var navToggle = document.getElementById("nav-toggle");
+    var navLinks = document.getElementById("nav-links");
+    if (navToggle && navLinks) {
+        navToggle.addEventListener("click", function () {
+            var open = navLinks.classList.toggle("is-open");
+            navToggle.setAttribute("aria-expanded", open);
+        });
+        document.addEventListener("click", function (e) {
+            if (navLinks.classList.contains("is-open") && !navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove("is-open");
+                navToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove("is-open");
+                navToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("scroll", checkStats, { passive: true });
     window.addEventListener("resize", reveal);

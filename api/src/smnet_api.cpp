@@ -21,7 +21,7 @@
 #include <linux/if.h>
 #include <sys/ioctl.h>
 
-namespace SecurityManager
+namespace Asmu
 {
 
 /**
@@ -204,7 +204,7 @@ public:
 
     NetworkStats getNetworkStats()
     {
-        SecurityManager::NetworkStats result = {0};
+        Asmu::NetworkStats result = {0};
 
         ::NetworkStats stats_manager;
         stats_manager.RefreshStats();
@@ -411,4 +411,4 @@ NetworkResult<std::string> NetworkMonitor::resolveHostname(const std::string& ip
     }
 }
 
-} // namespace SecurityManager
+} // namespace Asmu

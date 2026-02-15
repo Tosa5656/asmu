@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="docs-nav">
+    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">≡</button>
+    <div class="docs-nav-overlay" id="docs-nav-overlay"></div>
+    <nav class="docs-nav" id="docs-nav">
         <a href="../index.html" class="logo">ASMU</a>
         <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
         <div class="nav-section">Обзор</div>
@@ -46,7 +48,7 @@
         <h2>Дерево каталогов</h2>
         <pre><code>asmu/
 ├── api/                    # C++ API
-│   ├── include/            # Заголовки (securitymanager.h, sm*_api.h)
+│   ├── include/            # Заголовки (asmu.h, sm*_api.h)
 │   └── src/                # Реализация API
 ├── argsparser/             # Парсер аргументов командной строки
 ├── doc/                    # Документация (Doxygen, attacks)
@@ -64,7 +66,7 @@
         <h2>Поток данных</h2>
         <ul>
             <li><strong>Утилиты</strong> (smssh, smlog, smpass, smnet, smdb) — точки входа: парсят аргументы (argsparser), вызывают логику модуля, пишут в лог (logger) и выводят результат в stdout/stderr.</li>
-            <li><strong>API</strong> — те же возможности доступны через классы в namespace SecurityManager; реализация в api/src вызывает код из smssh, smlog и т.д. или дублирует логику там, где это необходимо.</li>
+            <li><strong>API</strong> — те же возможности доступны через классы в namespace Asmu; реализация в api/src вызывает код из smssh, smlog и т.д. или дублирует логику там, где это необходимо.</li>
             <li><strong>smdb</strong> читает HTML-файлы из doc/attacks/ и по ним строит поиск и выдачу рекомендаций; при установке документация копируется в /usr/share/doc/asmu/.</li>
         </ul>
 
@@ -83,5 +85,16 @@
             </tbody>
         </table>
     </main>
+    <script>
+        (function() {
+            var t = document.getElementById("docs-nav-toggle");
+            var n = document.getElementById("docs-nav");
+            var o = document.getElementById("docs-nav-overlay");
+            if (t && n && o) {
+                t.addEventListener("click", function() { n.classList.toggle("is-open"); o.classList.toggle("is-open"); });
+                o.addEventListener("click", function() { n.classList.remove("is-open"); o.classList.remove("is-open"); });
+            }
+        })();
+    </script>
 </body>
 </html>

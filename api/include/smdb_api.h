@@ -13,7 +13,7 @@
 #include <map>
 #include <memory>
 
-namespace SecurityManager
+namespace Asmu
 {
     /**
     * @brief Коды ошибок

@@ -1,9 +1,9 @@
-#ifndef SECURITYMANAGER_H
-#define SECURITYMANAGER_H
+#ifndef ASMU_H
+#define ASMU_H
 
 /**
- * @file securitymanager.h
- * @brief Security Manager C++ API - API для использования функций Security Manager
+ * @file asmu.h
+ * @brief ASMU C++ API - API для использования функций ASMU
  * @author Tosa5656
  * @date 4 января, 2026
  */
@@ -14,11 +14,11 @@
 #include "smssh_api.h"
 #include "smdb_api.h"
 
-namespace SecurityManager
+namespace Asmu
 {
     // Информация и версии API и его описании
     constexpr const char* VERSION = "1.0.0";
-    constexpr const char* DESCRIPTION = "Security Manager C++ API";
+    constexpr const char* DESCRIPTION = "ASMU C++ API";
 
     // Инициализация, очистка, получение основной информации
     bool initialize();

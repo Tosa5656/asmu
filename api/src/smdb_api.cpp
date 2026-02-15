@@ -15,7 +15,7 @@
 
 namespace fs = std::filesystem;
 
-namespace SecurityManager
+namespace Asmu
 {
     /**
     * @brief Реализация для класса AttackDatabase
@@ -32,8 +32,8 @@ namespace SecurityManager
         * @brief Путь к директории с документацией об атаках
         */
         std::string getDocsPath() {
-            if (fs::exists("/usr/share/doc/security-manager/attacks")) {
-                return "/usr/share/doc/security-manager/attacks";
+            if (fs::exists("/usr/share/doc/asmu/attacks")) {
+                return "/usr/share/doc/asmu/attacks";
             } else {
                 return "doc/attacks";
             }
@@ -146,7 +146,7 @@ namespace SecurityManager
 
                             while (std::getline(file, line))
                             {
-                                if (line.find("Security Manager") != std::string::npos ||
+                                if (line.find("ASMU") != std::string::npos ||
                                     line.find("Защита") != std::string::npos)
                                 {
                                     inProtection = true;
@@ -321,7 +321,7 @@ namespace SecurityManager
                     info.mitre_url = "https://attack.mitre.org/techniques/" + id + "/";
                     info.tactic = "Various";
                     info.platform = "Multiple";
-                    info.protection_tools = {"Check Security Manager documentation"};
+                    info.protection_tools = {"Check ASMU documentation"};
                     info.recommendations = {"Follow security best practices"};
                     info.requires_privileges = false;
                     info.impact = "Various";

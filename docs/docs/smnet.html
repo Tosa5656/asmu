@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="docs-nav">
+    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">≡</button>
+    <div class="docs-nav-overlay" id="docs-nav-overlay"></div>
+    <nav class="docs-nav" id="docs-nav">
         <a href="../index.html" class="logo">ASMU</a>
         <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
         <div class="nav-section">Обзор</div>
@@ -68,8 +70,19 @@
         </table>
 
         <h2>API (smnet_api.h)</h2>
-        <p>Класс <code>SecurityManager::NetworkMonitor</code>. Типы: <code>PortResult</code>, <code>ConnectionInfo</code>, <code>InterfaceInfo</code>. Результаты — <code>NetworkResult&lt;T&gt;</code> с кодами <code>NetworkError</code>.</p>
+        <p>Класс <code>Asmu::NetworkMonitor</code>. Типы: <code>PortResult</code>, <code>ConnectionInfo</code>, <code>InterfaceInfo</code>. Результаты — <code>NetworkResult&lt;T&gt;</code> с кодами <code>NetworkError</code>.</p>
         <p>Методы: <code>scanPorts()</code>, <code>getActiveConnections()</code>, <code>getInterfaceStats()</code> и др. Подробности в <code>api/include/smnet_api.h</code>.</p>
     </main>
+    <script>
+        (function() {
+            var t = document.getElementById("docs-nav-toggle");
+            var n = document.getElementById("docs-nav");
+            var o = document.getElementById("docs-nav-overlay");
+            if (t && n && o) {
+                t.addEventListener("click", function() { n.classList.toggle("is-open"); o.classList.toggle("is-open"); });
+                o.addEventListener("click", function() { n.classList.remove("is-open"); o.classList.remove("is-open"); });
+            }
+        })();
+    </script>
 </body>
 </html>

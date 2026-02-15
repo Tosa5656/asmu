@@ -9,7 +9,7 @@ API разбит на модули по утилитам:
 ```
 api/
 ├── include/                 # Заголовки
-│   ├── securitymanager.h    # Главный заголовок
+│   ├── asmu.h    # Главный заголовок
 │   ├── smpass_api.h         # Хранение паролей
 │   ├── smnet_api.h          # Сеть
 │   ├── smlog_api.h          # Логи
@@ -34,22 +34,22 @@ api/
 ## Начало работы
 
 ```cpp
-#include <securitymanager.h>
+#include <asmu.h>
 
 int main()
 {
-    SecurityManager::initialize();
+    Asmu::initialize();
 
-    SecurityManager::PasswordManager pwd_mgr;
-    auto hash = pwd_mgr.hashString("password", SecurityManager::HashAlgorithm::SHA256);
+    Asmu::PasswordManager pwd_mgr;
+    auto hash = pwd_mgr.hashString("password", Asmu::HashAlgorithm::SHA256);
 
-    SecurityManager::NetworkMonitor net_mgr;
+    Asmu::NetworkMonitor net_mgr;
     auto ports = net_mgr.scanPorts();
 
-    SecurityManager::AttackDatabase attack_db;
+    Asmu::AttackDatabase attack_db;
     auto attacks = attack_db.searchAttacks("brute force");
 
-    SecurityManager::cleanup();
+    Asmu::cleanup();
     return 0;
 }
 ```
@@ -67,8 +67,8 @@ make all         # Собрать утилиты и библиотеку
 Хранение и хэширование паролей.
 
 ```cpp
-SecurityManager::PasswordManager pwd_mgr;
-auto hash = pwd_mgr.hashString("password", SecurityManager::HashAlgorithm::SHA256);
+Asmu::PasswordManager pwd_mgr;
+auto hash = pwd_mgr.hashString("password", Asmu::HashAlgorithm::SHA256);
 auto result = pwd_mgr.addPassword("service.com", "username", "password");
 ```
 
@@ -76,7 +76,7 @@ auto result = pwd_mgr.addPassword("service.com", "username", "password");
 Сканирование портов и мониторинг соединений.
 
 ```cpp
-SecurityManager::NetworkMonitor net_mgr;
+Asmu::NetworkMonitor net_mgr;
 auto ports = net_mgr.scanPorts(1, 1024);
 auto connections = net_mgr.getActiveConnections();
 ```
@@ -85,7 +85,7 @@ auto connections = net_mgr.getActiveConnections();
 Чтение и поиск по системным логам.
 
 ```cpp
-SecurityManager::LogAnalyzer log_analyzer;
+Asmu::LogAnalyzer log_analyzer;
 auto entries = log_analyzer.readLogFile("/var/log/syslog");
 auto search_results = log_analyzer.searchLogFile("/var/log/auth.log", "sshd");
 ```
@@ -94,7 +94,7 @@ auto search_results = log_analyzer.searchLogFile("/var/log/auth.log", "sshd");
 Анализ конфигурации SSH и обнаружение атак.
 
 ```cpp
-SecurityManager::SSHSecurity ssh_sec;
+Asmu::SSHSecurity ssh_sec;
 auto report = ssh_sec.analyzeConfiguration("/etc/ssh/sshd_config");
 auto attacks = ssh_sec.detectAttacks("/var/log/auth.log");
 ```
@@ -103,7 +103,7 @@ auto attacks = ssh_sec.detectAttacks("/var/log/auth.log");
 Поиск по базе MITRE ATT&CK.
 
 ```cpp
-SecurityManager::AttackDatabase attack_db;
+Asmu::AttackDatabase attack_db;
 auto attacks = attack_db.searchAttacks("brute force");
 auto info = attack_db.getAttackInfo("T1110");
 ```
@@ -113,7 +113,7 @@ auto info = attack_db.getAttackInfo("T1110");
 Методы возвращают `Result<T>` с флагом успеха и сообщением:
 
 ```cpp
-auto result = pwd_mgr.hashString("test", SecurityManager::HashAlgorithm::SHA256);
+auto result = pwd_mgr.hashString("test", Asmu::HashAlgorithm::SHA256);
 if (result.success()) {
     std::cout << "Хэш: " << result.data << std::endl;
 } else {
@@ -157,7 +157,7 @@ make api_test  # Только тесты API (если есть)
 ## Версия
 
 ```cpp
-std::string version = SecurityManager::getVersion();
+std::string version = Asmu::getVersion();
 // Например: "1.0.0"
 ```
 

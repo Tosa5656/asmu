@@ -1,20 +1,20 @@
 /**
- * @file securitymanager.cpp
- * @brief Реализация Security Manager API
+ * @file asmu.cpp
+ * @brief Реализация ASMU API
  * @author Tosa5656
  * @date 4 января, 2026
  */
 
-#include "securitymanager.h"
+#include "asmu.h"
 #include <iostream>
 
 // Флаг инициализации
 static bool g_initialized = false;
 
-namespace SecurityManager
+namespace Asmu
 {
     /**
-    * @brief Инициализация Security Manager API
+    * @brief Инициализация ASMU API
     * @return Удача/Неудача
     */
     bool initialize()
@@ -27,7 +27,7 @@ namespace SecurityManager
     }
 
     /**
-    * @brief Очистка Security Manager API
+    * @brief Очистка ASMU API
     */
     void cleanup()
     {
@@ -38,7 +38,7 @@ namespace SecurityManager
     }
 
     /**
-    * @brief Полчить версию Security Manager API
+    * @brief Получить версию ASMU API
     * @return Версия
     */
     const char* getVersion()
@@ -47,7 +47,7 @@ namespace SecurityManager
     }
 
     /**
-    * @brief Получить описание Security Manager API
+    * @brief Получить описание ASMU API
     * @return Описание
     */
     const char* getDescription()

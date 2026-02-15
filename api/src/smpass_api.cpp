@@ -12,7 +12,7 @@
 #include <chrono>
 #include <ctime>
 
-namespace SecurityManager
+namespace Asmu
 {
 
 class PasswordManager::Impl
@@ -331,4 +331,4 @@ PasswordResult<std::vector<PasswordEntry>> PasswordManager::searchPasswords(cons
     }
 }
 
-} // namespace SecurityManager
+} // namespace Asmu

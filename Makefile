@@ -24,9 +24,9 @@ smdb: obj/smdb.o obj/logger.o
 	@mkdir -p bin
 	$(CC) $(CFLAGS) $(LDFLAGS) -Ismdb -Ilogger obj/smdb.o obj/logger.o -o bin/smdb
 
-libasmu.a: obj/smpass_api.o obj/smnet_api.o obj/smlog_api.o obj/smssh_api.o obj/smdb_api.o obj/securitymanager.o obj/logger.o obj/argsparser.o obj/smstorage.o obj/smnet.o obj/systemlogger.o obj/sshconfig.o obj/sshattdetector.o
+libasmu.a: obj/smpass_api.o obj/smnet_api.o obj/smlog_api.o obj/smssh_api.o obj/smdb_api.o obj/asmu.o obj/logger.o obj/argsparser.o obj/smstorage.o obj/smnet.o obj/systemlogger.o obj/sshconfig.o obj/sshattdetector.o
 	@echo "Сборка библиотеки API ASMU..."
-	@ar rcs libasmu.a obj/smpass_api.o obj/smnet_api.o obj/smlog_api.o obj/smssh_api.o obj/smdb_api.o obj/securitymanager.o obj/logger.o obj/argsparser.o obj/smstorage.o obj/smnet.o obj/systemlogger.o obj/sshconfig.o obj/sshattdetector.o
+	@ar rcs libasmu.a obj/smpass_api.o obj/smnet_api.o obj/smlog_api.o obj/smssh_api.o obj/smdb_api.o obj/asmu.o obj/logger.o obj/argsparser.o obj/smstorage.o obj/smnet.o obj/systemlogger.o obj/sshconfig.o obj/sshattdetector.o
 	@echo "Статическая библиотека libasmu.a создана."
 
 obj/smpass_api.o: api/src/smpass_api.cpp
@@ -49,9 +49,9 @@ obj/smdb_api.o: api/src/smdb_api.cpp
 	@mkdir -p obj
 	$(CC) $(CFLAGS) -Iapi/include -c api/src/smdb_api.cpp -o obj/smdb_api.o
 
-obj/securitymanager.o: api/src/securitymanager.cpp
+obj/asmu.o: api/src/asmu.cpp
 	@mkdir -p obj
-	$(CC) $(CFLAGS) -Iapi/include -c api/src/securitymanager.cpp -o obj/securitymanager.o
+	$(CC) $(CFLAGS) -Iapi/include -c api/src/asmu.cpp -o obj/asmu.o
 
 obj/argsparser.o: argsparser/argsparser.cpp
 	@mkdir -p obj

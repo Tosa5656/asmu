@@ -14,7 +14,7 @@
 #include <map>
 #include <functional>
 
-namespace SecurityManager
+namespace Asmu
 {
     /**
     * @brief Коды ошибок

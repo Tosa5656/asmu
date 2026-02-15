@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="docs-nav">
+    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">≡</button>
+    <div class="docs-nav-overlay" id="docs-nav-overlay"></div>
+    <nav class="docs-nav" id="docs-nav">
         <a href="../index.html" class="logo">ASMU</a>
         <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
         <div class="nav-section">Обзор</div>
@@ -69,5 +71,16 @@ make doc     # Doxygen-документация</code></pre>
             <li><a href="common.html" class="anchor">Общие компоненты</a> — logger и argsparser.</li>
         </ul>
     </main>
+    <script>
+        (function() {
+            var t = document.getElementById("docs-nav-toggle");
+            var n = document.getElementById("docs-nav");
+            var o = document.getElementById("docs-nav-overlay");
+            if (t && n && o) {
+                t.addEventListener("click", function() { n.classList.toggle("is-open"); o.classList.toggle("is-open"); });
+                o.addEventListener("click", function() { n.classList.remove("is-open"); o.classList.remove("is-open"); });
+            }
+        })();
+    </script>
 </body>
 </html>

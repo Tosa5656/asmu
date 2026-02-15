@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="docs-nav">
+    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">≡</button>
+    <div class="docs-nav-overlay" id="docs-nav-overlay"></div>
+    <nav class="docs-nav" id="docs-nav">
         <a href="../index.html" class="logo">ASMU</a>
         <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
         <div class="nav-section">Обзор</div>
@@ -41,24 +43,24 @@
     </nav>
     <main class="docs-main">
         <h1>C++ API</h1>
-        <p class="lead">Программный доступ ко всем возможностям ASMU из кода на C++. Единая точка входа — <code>securitymanager.h</code>.</p>
+        <p class="lead">Программный доступ ко всем возможностям ASMU из кода на C++. Единая точка входа — <code>asmu.h</code>.</p>
 
         <h2>Подключение и инициализация</h2>
-        <pre><code>#include &lt;securitymanager.h&gt;
+        <pre><code>#include &lt;asmu.h&gt;
 
 int main() {
-    SecurityManager::initialize();
+    Asmu::initialize();
 
-    SecurityManager::PasswordManager pwd_mgr;
-    auto hash = pwd_mgr.hashString("password", SecurityManager::HashAlgorithm::SHA256);
+    Asmu::PasswordManager pwd_mgr;
+    auto hash = pwd_mgr.hashString("password", Asmu::HashAlgorithm::SHA256);
 
-    SecurityManager::NetworkMonitor net_mgr;
+    Asmu::NetworkMonitor net_mgr;
     auto ports = net_mgr.scanPorts();
 
-    SecurityManager::AttackDatabase attack_db;
+    Asmu::AttackDatabase attack_db;
     auto attacks = attack_db.searchAttacks("brute force");
 
-    SecurityManager::cleanup();
+    Asmu::cleanup();
     return 0;
 }</code></pre>
 
@@ -87,5 +89,16 @@ make all         # утилиты + библиотека</code></pre>
         <h2>Подробнее</h2>
         <p>Полное описание API — в <code>api/README.md</code>. Сгенерированная Doxygen-документация — после <code>make doc</code> в <code>doc/api/html/</code>. Пример использования — <code>api/example.cpp</code>.</p>
     </main>
+    <script>
+        (function() {
+            var t = document.getElementById("docs-nav-toggle");
+            var n = document.getElementById("docs-nav");
+            var o = document.getElementById("docs-nav-overlay");
+            if (t && n && o) {
+                t.addEventListener("click", function() { n.classList.toggle("is-open"); o.classList.toggle("is-open"); });
+                o.addEventListener("click", function() { n.classList.remove("is-open"); o.classList.remove("is-open"); });
+            }
+        })();
+    </script>
 </body>
 </html>

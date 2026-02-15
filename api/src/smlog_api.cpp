@@ -16,7 +16,7 @@
 #include <set>
 #include <map>
 
-namespace SecurityManager
+namespace Asmu
 {
     /**
     * @brief Реализация для LogAnalyzer

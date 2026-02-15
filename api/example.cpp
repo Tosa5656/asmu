@@ -1,31 +1,31 @@
 /**
  * @file example.cpp
- * @brief Пример использования Security Manager API
+ * @brief Пример использования ASMU API
  * @author Tosa5656
  * @date 4 января, 2026
  */
 
-#include <securitymanager.h>
+#include <asmu.h>
 #include <iostream>
 #include <vector>
 
 int main()
 {
-    std::cout << "Пример использования Security Manager API" << std::endl;
-    std::cout << "Версия: " << SecurityManager::getVersion() << std::endl;
-    std::cout << "Описание: " << SecurityManager::getDescription() << std::endl;
+    std::cout << "Пример использования ASMU API" << std::endl;
+    std::cout << "Версия: " << Asmu::getVersion() << std::endl;
+    std::cout << "Описание: " << Asmu::getDescription() << std::endl;
     std::cout << std::endl;
 
-    if (!SecurityManager::initialize())
+    if (!Asmu::initialize())
     {
-        std::cerr << "Ошибка инициализации API: " << SecurityManager::getLastError() << std::endl;
+        std::cerr << "Ошибка инициализации API: " << Asmu::getLastError() << std::endl;
         return 1;
     }
 
     std::cout << "=== Управление паролями ===" << std::endl;
-    SecurityManager::PasswordManager pwd_mgr;
+    Asmu::PasswordManager pwd_mgr;
 
-    auto hash_result = pwd_mgr.hashString("MySecurePassword123!", SecurityManager::HashAlgorithm::SHA256);
+    auto hash_result = pwd_mgr.hashString("MySecurePassword123!", Asmu::HashAlgorithm::SHA256);
     if (hash_result.success())
         std::cout << "SHA256 хеш: " << hash_result.data.substr(0, 32) << "..." << std::endl;
     else
@@ -42,7 +42,7 @@ int main()
     std::cout << std::endl;
 
     std::cout << "=== Мониторинг сети ===" << std::endl;
-    SecurityManager::NetworkMonitor net_mgr;
+    Asmu::NetworkMonitor net_mgr;
 
     auto ports_result = net_mgr.scanPorts(20, 25);
     if (ports_result.success())
@@ -62,7 +62,7 @@ int main()
     std::cout << std::endl;
 
     std::cout << "=== Анализ логов ===" << std::endl;
-    SecurityManager::LogAnalyzer log_analyzer;
+    Asmu::LogAnalyzer log_analyzer;
 
     auto log_result = log_analyzer.readLogFile("test/test_system.log", {}, 3);
     if (log_result.success())
@@ -75,7 +75,7 @@ int main()
     std::cout << std::endl;
 
     std::cout << "=== SSH безопасность ===" << std::endl;
-    SecurityManager::SSHSecurity ssh_sec;
+    Asmu::SSHSecurity ssh_sec;
 
     auto ssh_result = ssh_sec.analyzeConfiguration("test/test_sshd_config");
     if (ssh_result.success())
@@ -93,7 +93,7 @@ int main()
     std::cout << std::endl;
 
     std::cout << "=== База данных MITRE ATT&CK ===" << std::endl;
-    SecurityManager::AttackDatabase attack_db;
+    Asmu::AttackDatabase attack_db;
 
     auto search_result = attack_db.searchAttacks("brute force");
     if (search_result.success())
@@ -129,7 +129,7 @@ int main()
     if (export_result.success())
         std::cout << "Информация об атаке экспортирована в /tmp/t1110_info.txt" << std::endl;
 
-    SecurityManager::cleanup();
+    Asmu::cleanup();
 
     std::cout << std::endl << "Пример использования API успешно завершен!" << std::endl;
     std::cout << "Для дополнительной информации см. api/README.md" << std::endl;
