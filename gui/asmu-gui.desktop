@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ASMU GUI
+GenericName=Security Manager
+Comment=Графический интерфейс для Advanced Security Manager Utils
+Exec=asmu-gui
+Icon=security-high
+Terminal=false
+Categories=System;Security;Network;
+Keywords=security;ssh;network;logs;passwords;
+StartupNotify=true

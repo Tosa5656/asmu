@@ -4,81 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Документация ASMU</title>
+    <meta name="description" content="Полная документация по Advanced Security Manager Utils - модули, API, архитектура">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">≡</button>
+    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">☰</button>
     <div class="docs-nav-overlay" id="docs-nav-overlay"></div>
+
     <nav class="docs-nav" id="docs-nav">
-        <a href="../index.html" class="logo">ASMU</a>
-        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
+        <a href="../index.html" class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="4" y="4" width="24" height="24" rx="6" stroke="url(#logo-gradient)" stroke-width="2"/>
+                <path d="M12 16L15 19L20 13" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="logo-gradient" x1="4" y1="4" x2="28" y2="28">
+                        <stop offset="0%" stop-color="#00d9ff"/>
+                        <stop offset="100%" stop-color="#7b2ff7"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            ASMU
+        </a>
+
+        <a href="../index.html" style="display: inline-block; margin: 0 1.5rem 1rem; padding: 0.5rem 1rem; background: rgba(0, 217, 255, 0.1); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 8px; color: #00d9ff; text-decoration: none; font-size: 0.875rem; font-weight: 600;">← Главная</a>
+
         <div class="nav-section">Обзор</div>
         <ul>
-            <li><a href="index.html">Введение</a></li>
+            <li><a href="index.html" class="active">Введение</a></li>
             <li><a href="architecture.html">Архитектура</a></li>
         </ul>
-        <div class="nav-section">Модули</div>
+
+        <div class="nav-section">Утилиты</div>
         <ul>
-            <li><a href="smssh.html">smssh</a></li>
-            <li><a href="smlog.html">smlog</a></li>
-            <li><a href="smpass.html">smpass</a></li>
-            <li><a href="smnet.html">smnet</a></li>
-            <li><a href="smdb.html">smdb</a></li>
+            <li><a href="smssh.html">smssh — SSH Security</a></li>
+            <li><a href="smlog.html">smlog — Log Analysis</a></li>
+            <li><a href="smpass.html">smpass — Password Manager</a></li>
+            <li><a href="smnet.html">smnet — Network Monitor</a></li>
+            <li><a href="smdb.html">smdb — MITRE ATT&CK</a></li>
         </ul>
-        <div class="nav-section">Общее</div>
+
+        <div class="nav-section">Разработка</div>
         <ul>
-            <li><a href="common.html">logger, argsparser</a></li>
-        </ul>
-        <div class="nav-section">API</div>
-        <ul>
+            <li><a href="common.html">Общие компоненты</a></li>
             <li><a href="api.html">C++ API</a></li>
         </ul>
-        <div class="nav-section">Разделы</div>
+
+        <div class="nav-section">Справочник</div>
         <ul>
-            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
+            <li><a href="attacks/index.html">База атак MITRE ATT&CK</a></li>
         </ul>
     </nav>
+
     <main class="docs-main">
         <h1>Документация ASMU</h1>
-        <p class="lead">Advanced Security Manager Utils — описание модулей, архитектуры и API проекта.</p>
+        <p class="lead">Advanced Security Manager Utils — полное руководство по использованию, архитектуре и API проекта.</p>
 
-        <h2>Введение</h2>
-        <p>ASMU — набор консольных утилит для администраторов Linux: мониторинг, анализ и усиление безопасности. Проект написан на C++20 и состоит из пяти основных утилит и единого C++ API.</p>
+        <h2>О проекте</h2>
+        <p>ASMU — это набор профессиональных консольных утилит для администраторов Linux, предназначенных для мониторинга, анализа и усиления безопасности серверов. Проект написан на современном C++20 и предоставляет как CLI-интерфейс, так и графическую оболочку на Qt.</p>
 
-        <h2>Модули</h2>
+        <h3>Ключевые особенности</h3>
+        <ul>
+            <li><strong>Модульная архитектура</strong> — каждая утилита решает конкретную задачу</li>
+            <li><strong>Высокая производительность</strong> — написано на C++20 с фокусом на скорость</li>
+            <li><strong>Единый API</strong> — статическая библиотека для интеграции в свои проекты</li>
+            <li><strong>Криптография</strong> — AES256, SHA256 через OpenSSL</li>
+            <li><strong>MITRE ATT&CK</strong> — встроенная база знаний по атакам и защите</li>
+        </ul>
+
+        <h2>Утилиты</h2>
         <div class="card-grid">
-            <a href="smssh.html" class="card-link"><strong>smssh</strong><br><span>Безопасность SSH: конфиг, ключи, мониторинг атак</span></a>
-            <a href="smlog.html" class="card-link"><strong>smlog</strong><br><span>Логи: чтение, поиск, отчёты, journald</span></a>
-            <a href="smpass.html" class="card-link"><strong>smpass</strong><br><span>Пароли: AES256, SHA256, хранилище</span></a>
-            <a href="smnet.html" class="card-link"><strong>smnet</strong><br><span>Сеть: порты, соединения, трафик</span></a>
-            <a href="smdb.html" class="card-link"><strong>smdb</strong><br><span>База MITRE ATT&CK и рекомендации</span></a>
+            <a href="smssh.html" class="card-link">
+                <strong>🔐 smssh</strong>
+                <span>Безопасность SSH: анализ конфигурации, генерация ключей, мониторинг атак brute force и dictionary</span>
+            </a>
+            <a href="smlog.html" class="card-link">
+                <strong>📋 smlog</strong>
+                <span>Анализ логов: файловые логи и journald, поиск, отчёты, мониторинг в реальном времени</span>
+            </a>
+            <a href="smpass.html" class="card-link">
+                <strong>🔑 smpass</strong>
+                <span>Менеджер паролей: локальное хранение с шифрованием AES256, генерация хэшей SHA256</span>
+            </a>
+            <a href="smnet.html" class="card-link">
+                <strong>🌐 smnet</strong>
+                <span>Сетевой мониторинг: сканирование портов, анализ соединений TCP/UDP, статистика трафика</span>
+            </a>
+            <a href="smdb.html" class="card-link">
+                <strong>📚 smdb</strong>
+                <span>База знаний: MITRE ATT&CK с описанием техник атак и рекомендациями по защите</span>
+            </a>
         </div>
 
-        <h2>Сборка и зависимости</h2>
-        <p>Требования: Linux, компилятор C++20, OpenSSL, libpcap. Опционально: MaxMind GeoLite2 для GeoIP в smssh.</p>
-        <pre><code>make          # утилиты
-make libasmu.a  # статическая библиотека API
-make check   # тесты
-make doc     # Doxygen-документация</code></pre>
-
-        <h2>Связанные разделы</h2>
+        <h2>Быстрый старт</h2>
+        <h3>Требования</h3>
         <ul>
-            <li><a href="architecture.html" class="anchor">Архитектура</a> — дерево каталогов и связи модулей.</li>
-            <li><a href="api.html" class="anchor">C++ API</a> — использование из кода (PasswordManager, NetworkMonitor, LogAnalyzer, SSHSecurity, AttackDatabase).</li>
-            <li><a href="common.html" class="anchor">Общие компоненты</a> — logger и argsparser.</li>
+            <li>Linux (любой современный дистрибутив)</li>
+            <li>Компилятор с поддержкой C++20 (GCC 10+, Clang 11+)</li>
+            <li>OpenSSL (для криптографии)</li>
+            <li>libpcap (для сетевого мониторинга)</li>
+            <li>Qt5 или Qt6 (опционально, для GUI)</li>
+            <li>MaxMind GeoLite2 (опционально, для GeoIP в smssh)</li>
         </ul>
+
+        <h3>Установка</h3>
+        <pre><code>git clone https://github.com/Tosa5656/asmu
+cd asmu
+make
+make check    # запустить тесты
+sudo make install</code></pre>
+
+        <p>Утилиты будут установлены в <code>/usr/local/bin/</code>, документация — в <code>/usr/share/doc/asmu/</code>.</p>
+
+        <h3>Сборка GUI</h3>
+        <pre><code>make gui
+sudo make install-gui
+asmu-gui</code></pre>
+
+        <h3>Сборка API библиотеки</h3>
+        <pre><code>make libasmu.a</code></pre>
+
+        <h2>Архитектура</h2>
+        <p>Проект организован в модульную структуру, где каждая утилита является независимым модулем с собственной логикой, но все они используют общие компоненты:</p>
+        <ul>
+            <li><strong>logger</strong> — единая система логирования</li>
+            <li><strong>argsparser</strong> — парсинг аргументов командной строки</li>
+            <li><strong>api</strong> — C++ API для всех модулей</li>
+            <li><strong>json</strong> — работа с JSON (nlohmann/json)</li>
+        </ul>
+
+        <p>Подробнее об архитектуре читайте в разделе <a href="architecture.html">Архитектура</a>.</p>
+
+        <h2>C++ API</h2>
+        <p>ASMU предоставляет статическую библиотеку <code>libasmu.a</code> с единым API для всех модулей. Это позволяет интегрировать функциональность ASMU в свои C++ проекты.</p>
+
+        <p>Основные классы API:</p>
+        <ul>
+            <li><code>PasswordManager</code> — управление паролями с шифрованием</li>
+            <li><code>NetworkMonitor</code> — сетевой мониторинг и анализ</li>
+            <li><code>LogAnalyzer</code> — анализ системных логов</li>
+            <li><code>SSHSecurity</code> — проверка безопасности SSH</li>
+            <li><code>AttackDatabase</code> — работа с базой MITRE ATT&CK</li>
+        </ul>
+
+        <p>Подробная документация API доступна в разделе <a href="api.html">C++ API</a>.</p>
+
+        <h2>Дополнительные ресурсы</h2>
+        <ul>
+            <li><a href="https://github.com/Tosa5656/asmu" target="_blank" rel="noopener">GitHub репозиторий</a></li>
+            <li><a href="common.html">Общие компоненты (logger, argsparser)</a></li>
+            <li><a href="attacks/index.html">База атак MITRE ATT&CK</a></li>
+        </ul>
+
+        <h2>Лицензия</h2>
+        <p>ASMU распространяется под лицензией GPL-3.0. Исходный код полностью открыт и доступен на GitHub.</p>
     </main>
+
     <script>
         (function() {
-            var t = document.getElementById("docs-nav-toggle");
-            var n = document.getElementById("docs-nav");
-            var o = document.getElementById("docs-nav-overlay");
-            if (t && n && o) {
-                t.addEventListener("click", function() { n.classList.toggle("is-open"); o.classList.toggle("is-open"); });
-                o.addEventListener("click", function() { n.classList.remove("is-open"); o.classList.remove("is-open"); });
+            var toggle = document.getElementById("docs-nav-toggle");
+            var nav = document.getElementById("docs-nav");
+            var overlay = document.getElementById("docs-nav-overlay");
+
+            if (toggle && nav && overlay) {
+                toggle.addEventListener("click", function() {
+                    nav.classList.toggle("is-open");
+                    overlay.classList.toggle("is-open");
+                });
+
+                overlay.addEventListener("click", function() {
+                    nav.classList.remove("is-open");
+                    overlay.classList.remove("is-open");
+                });
             }
         })();
     </script>

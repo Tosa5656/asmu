@@ -4,266 +4,589 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASMU — Advanced Security Manager Utils</title>
-    <meta name="description" content="Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности. SSH, логи, пароли, сеть, база знаний MITRE ATT&CK. C++, OpenSSL, libpcap.">
+    <meta name="description" content="Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности. SSH, логи, пароли, сеть, база знаний MITRE ATT&CK.">
+    <meta name="keywords" content="Linux, security, SSH, monitoring, C++, OpenSSL, MITRE ATT&CK, cybersecurity">
     <meta property="og:title" content="ASMU — Advanced Security Manager Utils">
-    <meta property="og:description" content="Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности без лишней магии.">
+    <meta property="og:description" content="Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tosa5656.github.io/asmu/">
+    <meta name="theme-color" content="#00d9ff">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="noise-bg"></div>
     <canvas id="particles" class="particles"></canvas>
-    <div class="grid-bg"></div>
 
     <header class="header">
         <nav class="nav">
             <a href="#" class="logo">
-                <span class="logo-text">ASMU</span>
-                <span class="logo-pulse"></span>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="24" height="24" rx="6" stroke="url(#logo-gradient)" stroke-width="2"/>
+                    <path d="M12 16L15 19L20 13" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="logo-gradient" x1="4" y1="4" x2="28" y2="28">
+                            <stop offset="0%" stop-color="#00d9ff"/>
+                            <stop offset="100%" stop-color="#7b2ff7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>ASMU</span>
             </a>
             <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Меню" aria-expanded="false">
-                <span class="nav-toggle-icon"></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#about">О проекте</a></li>
-                <li><a href="#utils">Утилиты</a></li>
-                <li><a href="#api">API</a></li>
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#tools">Утилиты</a></li>
+                <li><a href="#stats">Статистика</a></li>
                 <li><a href="#install">Установка</a></li>
                 <li><a href="docs/index.html">Документация</a></li>
+                <li><a href="https://github.com/Tosa5656/asmu" target="_blank" rel="noopener" class="nav-github">
+                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    GitHub
+                </a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <div class="hero-glow"></div>
-            <h1 class="hero-title">
-                <span class="hero-title-line">Advanced Security</span>
-                <span class="hero-title-line accent">Manager Utils</span>
-            </h1>
-            <p class="hero-desc">
-                Набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности без лишней магии.
-            </p>
-            <div class="hero-stats reveal">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="5">0</span>
-                    <span class="stat-label">утилит</span>
+            <div class="hero-bg">
+                <div class="hero-gradient"></div>
+                <div class="hero-grid"></div>
+            </div>
+            <div class="container">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Open Source • GPL-3.0</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="100">0</span>
-                    <span class="stat-label">% C++</span>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Advanced Security</span>
+                    <span class="gradient-text">Manager Utils</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Профессиональный набор утилит для администраторов Linux.<br>
+                    Мониторинг, анализ и усиление безопасности без лишней магии.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="5">0</div>
+                        <div class="stat-label">Утилит</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="99">0</div>
+                        <div class="stat-label">% C++</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="80">0</div>
+                        <div class="stat-label">% Покрытие</div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="1">0</span>
-                    <span class="stat-label">команда</span>
+                <div class="hero-actions">
+                    <a href="#install" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 3V13M10 13L6 9M10 13L14 9M3 17H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Установить
+                    </a>
+                    <a href="https://github.com/Tosa5656/asmu" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        Исходный код
+                    </a>
+                </div>
+                <div class="hero-tech">
+                    <span class="tech-badge">C++20</span>
+                    <span class="tech-badge">OpenSSL</span>
+                    <span class="tech-badge">libpcap</span>
+                    <span class="tech-badge">Qt5/6</span>
+                    <span class="tech-badge">MITRE ATT&CK</span>
                 </div>
             </div>
-            <div class="hero-actions">
-                <a href="https://github.com/Tosa5656/asmu" class="btn btn-primary" target="_blank" rel="noopener">
-                    <span>GitHub</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="currentColor"/></svg>
-                </a>
-                <a href="#install" class="btn btn-outline">Установка</a>
-            </div>
-            <div class="hero-scroll">
-                <div class="scroll-indicator"></div>
-            </div>
-        </section>
-
-        <section id="about" class="section">
-            <h2 class="section-title reveal">
-                <span class="title-line"></span>
-                <span>О проекте</span>
-            </h2>
-            <p class="section-text reveal">
-                Пять консольных утилит, которые закрывают типичные задачи по безопасности: SSH, логи, пароли, сеть и справочник по атакам. У каждой команды есть <code class="inline-code">help</code> — просто запустите <code class="inline-code">smssh help</code>, <code class="inline-code">smlog help</code> и т.д.
-            </p>
-            <div class="utils-table reveal">
-                <div class="table-row table-header">
-                    <div class="table-cell">Утилита</div>
-                    <div class="table-cell">Назначение</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell"><code class="inline-code">smssh</code></div>
-                    <div class="table-cell">Безопасность SSH: конфиг, ключи, мониторинг атак</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell"><code class="inline-code">smlog</code></div>
-                    <div class="table-cell">Логи: чтение, поиск, отчёты, мониторинг в реальном времени</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell"><code class="inline-code">smpass</code></div>
-                    <div class="table-cell">Пароли: хранение с AES256, хэши SHA256</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell"><code class="inline-code">smnet</code></div>
-                    <div class="table-cell">Сеть: порты, соединения, трафик, статистика</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell"><code class="inline-code">smdb</code></div>
-                    <div class="table-cell">База MITRE ATT&CK: описание атак и рекомендации по защите</div>
-                </div>
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
             </div>
         </section>
 
-        <section id="utils" class="section section-dark">
-            <h2 class="section-title reveal">
-                <span class="title-line"></span>
-                <span>Утилиты</span>
-            </h2>
-            <div class="utils-grid">
-                <article class="card reveal" data-tilt>
-                    <div class="card-icon">🔐</div>
-                    <h3 class="card-title">smssh</h3>
-                    <p class="card-desc">Проверка и усиление настроек SSH-сервера, разбор логов и поиск признаков атак. Анализ конфигурации, генерация безопасного конфига, мониторинг brute force и dictionary-атак.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Анализ конфига</span>
-                        <span class="feature-tag">Мониторинг атак</span>
-                        <span class="feature-tag">Генерация ключей</span>
+        <section id="features" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Возможности</span>
+                    <h2 class="section-title">Всё для безопасности Linux</h2>
+                    <p class="section-desc">Комплексное решение для мониторинга и защиты серверов</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Модульная архитектура</h3>
+                        <p>Пять независимых утилит, каждая решает свою задачу. Используйте только то, что нужно.</p>
                     </div>
-                    <div class="code-wrap">
-                        <code class="card-cmd" data-copy="smssh analyze · smssh monitor · smssh gen-key">smssh analyze · smssh monitor · smssh gen-key</code>
-                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Высокая производительность</h3>
+                        <p>Написано на C++20 с фокусом на скорость и эффективность использования ресурсов.</p>
                     </div>
-                </article>
-                <article class="card reveal" data-tilt>
-                    <div class="card-icon">📋</div>
-                    <h3 class="card-title">smlog</h3>
-                    <p class="card-desc">Чтение, поиск и мониторинг логов, в том числе journald. Файловые логи и systemd journal, поиск по ключевым словам, топ IP и пользователей, готовые отчёты.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">systemd journal</span>
-                        <span class="feature-tag">Поиск</span>
-                        <span class="feature-tag">Отчёты</span>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Мониторинг в реальном времени</h3>
+                        <p>Отслеживайте атаки SSH, анализируйте логи и сетевой трафик в режиме реального времени.</p>
                     </div>
-                    <div class="code-wrap">
-                        <code class="card-cmd" data-copy="smlog read · smlog search · smlog monitor">smlog read · smlog search · smlog monitor</code>
-                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7V12C2 16.55 5.84 20.74 12 22C18.16 20.74 22 16.55 22 12V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Криптография</h3>
+                        <p>AES256 для шифрования, SHA256 для хэширования. Используем проверенные алгоритмы OpenSSL.</p>
                     </div>
-                </article>
-                <article class="card reveal" data-tilt>
-                    <div class="card-icon">🔑</div>
-                    <h3 class="card-title">smpass</h3>
-                    <p class="card-desc">Локальное хранение паролей с шифрованием и хэшированием. Хранение с AES256, SHA256 для хэшей. Данные в <code class="inline-code">~/.asmu/storage/</code>.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">AES256</span>
-                        <span class="feature-tag">SHA256</span>
-                        <span class="feature-tag">Безопасное хранение</span>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>CLI и GUI</h3>
+                        <p>Консольные утилиты для автоматизации и графический интерфейс на Qt для удобной работы.</p>
                     </div>
-                    <div class="code-wrap">
-                        <code class="card-cmd" data-copy="smpass add-password · smpass hash-sha256">smpass add-password · smpass hash-sha256</code>
-                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="17" r="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>MITRE ATT&CK</h3>
+                        <p>Встроенная база знаний с описанием атак и рекомендациями по защите от них.</p>
                     </div>
-                </article>
-                <article class="card reveal" data-tilt>
-                    <div class="card-icon">🌐</div>
-                    <h3 class="card-title">smnet</h3>
-                    <p class="card-desc">Сканирование портов, активные соединения и статистика по интерфейсам. Список соединений TCP/UDP и процессов, мониторинг трафика на интерфейсе (pcap).</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Сканирование портов</span>
-                        <span class="feature-tag">Мониторинг</span>
-                        <span class="feature-tag">Статистика</span>
-                    </div>
-                    <div class="code-wrap">
-                        <code class="card-cmd" data-copy="smnet scan · smnet connections · smnet stats">smnet scan · smnet connections · smnet stats</code>
-                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
-                    </div>
-                </article>
-                <article class="card reveal card-wide" data-tilt>
-                    <div class="card-icon">📚</div>
-                    <h3 class="card-title">smdb</h3>
-                    <p class="card-desc">Справочник техник MITRE ATT&CK с описаниями и подсказками, какими утилитами ASMU можно прикрыться. Список и поиск по техникам, описание и рекомендации по защите, указание инструментов ASMU.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">MITRE ATT&CK</span>
-                        <span class="feature-tag">Поиск</span>
-                        <span class="feature-tag">Рекомендации</span>
-                    </div>
-                    <div class="code-wrap">
-                        <code class="card-cmd" data-copy="smdb list · smdb search <keyword> · smdb tools <attack_id>">smdb list · smdb search &lt;keyword&gt; · smdb tools &lt;attack_id&gt;</code>
-                        <button type="button" class="copy-btn" aria-label="Копировать">Копировать</button>
-                    </div>
-                </article>
+                </div>
             </div>
         </section>
 
-        <section id="api" class="section">
-            <h2 class="section-title reveal">
-                <span class="title-line"></span>
-                <span>API</span>
-            </h2>
-            <p class="section-text reveal">
-                Если хочется вызывать те же возможности из кода на C++ — есть единый API и статическая библиотека <code class="inline-code">libasmu.a</code>. Сборка библиотеки: <code class="inline-code">make libasmu.a</code>.
-            </p>
-            <div class="api-links reveal">
-                <a href="https://github.com/Tosa5656/asmu/tree/master/api" class="api-link" target="_blank" rel="noopener">
-                    <div class="api-link-icon">📖</div>
-                    <div class="api-link-content">
-                        <h3>Описание API</h3>
-                        <p>Документация и примеры использования</p>
+        <section id="tools" class="section section-dark">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Утилиты</span>
+                    <h2 class="section-title">Пять инструментов безопасности</h2>
+                    <p class="section-desc">Каждая утилита решает конкретную задачу администратора</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🔐</div>
+                            <div class="tool-info">
+                                <h3>smssh</h3>
+                                <span class="tool-tag">SSH Security</span>
+                            </div>
+                        </div>
+                        <p class="tool-desc">Анализ конфигурации SSH, генерация безопасных настроек, мониторинг атак brute force и dictionary, парсинг логов.</p>
+                        <ul class="tool-features">
+                            <li>Анализ конфигурации</li>
+                            <li>Генерация ключей</li>
+                            <li>Мониторинг атак</li>
+                            <li>Парсинг логов</li>
+                        </ul>
+                        <div class="tool-code">
+                            <code>smssh analyze</code>
+                            <button class="copy-btn" data-copy="smssh analyze">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="api-link-arrow">→</div>
-                </a>
-                <a href="https://github.com/Tosa5656/asmu/tree/master/doc" class="api-link" target="_blank" rel="noopener">
-                    <div class="api-link-icon">📄</div>
-                    <div class="api-link-content">
-                        <h3>Сгенерированная документация</h3>
-                        <p>После <code class="inline-code">make doc</code></p>
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">📋</div>
+                            <div class="tool-info">
+                                <h3>smlog</h3>
+                                <span class="tool-tag">Log Analysis</span>
+                            </div>
+                        </div>
+                        <p class="tool-desc">Чтение и анализ системных логов, поддержка journald, поиск по ключевым словам, готовые отчёты, мониторинг в реальном времени.</p>
+                        <ul class="tool-features">
+                            <li>Файловые логи и journald</li>
+                            <li>Поиск и фильтрация</li>
+                            <li>Готовые отчёты</li>
+                            <li>Real-time мониторинг</li>
+                        </ul>
+                        <div class="tool-code">
+                            <code>smlog monitor</code>
+                            <button class="copy-btn" data-copy="smlog monitor">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="api-link-arrow">→</div>
-                </a>
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🔑</div>
+                            <div class="tool-info">
+                                <h3>smpass</h3>
+                                <span class="tool-tag">Password Manager</span>
+                            </div>
+                        </div>
+                        <p class="tool-desc">Локальное хранение паролей с шифрованием AES256, генерация хэшей SHA256, безопасное хранение в ~/.asmu/storage/.</p>
+                        <ul class="tool-features">
+                            <li>Шифрование AES256</li>
+                            <li>Хэширование SHA256</li>
+                            <li>Локальное хранение</li>
+                            <li>Безопасный доступ</li>
+                        </ul>
+                        <div class="tool-code">
+                            <code>smpass add-password</code>
+                            <button class="copy-btn" data-copy="smpass add-password">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🌐</div>
+                            <div class="tool-info">
+                                <h3>smnet</h3>
+                                <span class="tool-tag">Network Monitor</span>
+                            </div>
+                        </div>
+                        <p class="tool-desc">Сканирование портов, мониторинг активных соединений TCP/UDP, анализ трафика через pcap, статистика по интерфейсам.</p>
+                        <ul class="tool-features">
+                            <li>Сканирование портов</li>
+                            <li>Мониторинг соединений</li>
+                            <li>Анализ трафика</li>
+                            <li>Статистика интерфейсов</li>
+                        </ul>
+                        <div class="tool-code">
+                            <code>smnet scan</code>
+                            <button class="copy-btn" data-copy="smnet scan">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">📚</div>
+                            <div class="tool-info">
+                                <h3>smdb</h3>
+                                <span class="tool-tag">MITRE ATT&CK</span>
+                            </div>
+                        </div>
+                        <p class="tool-desc">База знаний MITRE ATT&CK с описанием техник атак, рекомендациями по защите и привязкой к утилитам ASMU.</p>
+                        <ul class="tool-features">
+                            <li>База MITRE ATT&CK</li>
+                            <li>Поиск по техникам</li>
+                            <li>Рекомендации по защите</li>
+                            <li>Привязка к утилитам</li>
+                        </ul>
+                        <div class="tool-code">
+                            <code>smdb search brute</code>
+                            <button class="copy-btn" data-copy="smdb search brute">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Статистика</span>
+                    <h2 class="section-title">Проект в цифрах</h2>
+                    <p class="section-desc">Актуальные данные из GitHub репозитория</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-box-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-box-value">99.1%</div>
+                        <div class="stat-box-label">C++</div>
+                        <div class="stat-box-bar">
+                            <div class="stat-box-bar-fill" style="width: 99.1%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-box-value">12</div>
+                        <div class="stat-box-label">Модулей</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-box-value">80%</div>
+                        <div class="stat-box-label">Покрытие тестами</div>
+                        <div class="stat-box-bar">
+                            <div class="stat-box-bar-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M16 21V5C16 3.89543 15.1046 3 14 3H10C8.89543 3 8 3.89543 8 5V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M12 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-box-value">GPL-3.0</div>
+                        <div class="stat-box-label">Лицензия</div>
+                    </div>
+                </div>
+                <div class="lang-chart">
+                    <h3 class="lang-chart-title">Языки программирования</h3>
+                    <div class="lang-chart-bars">
+                        <div class="lang-bar">
+                            <div class="lang-bar-info">
+                                <span class="lang-bar-name">C++</span>
+                                <span class="lang-bar-percent">99.1%</span>
+                            </div>
+                            <div class="lang-bar-track">
+                                <div class="lang-bar-fill" style="width: 99.1%; background: linear-gradient(90deg, #00d9ff, #7b2ff7)"></div>
+                            </div>
+                        </div>
+                        <div class="lang-bar">
+                            <div class="lang-bar-info">
+                                <span class="lang-bar-name">Makefile</span>
+                                <span class="lang-bar-percent">0.9%</span>
+                            </div>
+                            <div class="lang-bar-track">
+                                <div class="lang-bar-fill" style="width: 0.9%; background: #4ade80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="install" class="section section-dark">
-            <h2 class="section-title reveal">
-                <span class="title-line"></span>
-                <span>Установка</span>
-            </h2>
-            <p class="section-text reveal">Требования: Linux, компилятор с C++20, OpenSSL, libpcap. Опционально: MaxMind GeoLite2 для GeoIP в smssh.</p>
-            <ul class="requirements reveal">
-                <li>Linux</li>
-                <li>Компилятор C++20</li>
-                <li>OpenSSL</li>
-                <li>libpcap</li>
-                <li>MaxMind GeoLite2</li>
-            </ul>
-            <div class="install-block reveal">
-                <div class="install-code-wrap">
-                    <pre class="install-code" id="install-pre"><code>git clone https://github.com/Tosa5656/asmu
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Установка</span>
+                    <h2 class="section-title">Быстрый старт</h2>
+                    <p class="section-desc">Установите ASMU за несколько минут</p>
+                </div>
+                <div class="install-grid">
+                    <div class="install-card">
+                        <div class="install-step">01</div>
+                        <h3>Требования</h3>
+                        <ul class="install-list">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Linux
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                C++20 компилятор
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                OpenSSL
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                libpcap
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="install-card install-card-main">
+                        <div class="install-step">02</div>
+                        <h3>Установка</h3>
+                        <div class="code-block">
+                            <div class="code-block-header">
+                                <span class="code-block-lang">bash</span>
+                                <button class="code-copy-btn" data-copy="git clone https://github.com/Tosa5656/asmu
 cd asmu
 make
 make check
-make doc
+sudo make install">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    Копировать
+                                </button>
+                            </div>
+                            <pre><code>git clone https://github.com/Tosa5656/asmu
+cd asmu
+make
+make check
 sudo make install</code></pre>
-                    <button type="button" class="copy-btn copy-btn-install" id="install-copy" aria-label="Копировать">Копировать</button>
+                        </div>
+                    </div>
+                    <div class="install-card">
+                        <div class="install-step">03</div>
+                        <h3>Готово!</h3>
+                        <p class="install-ready">Утилиты установлены в <code>/usr/local/bin/</code></p>
+                        <div class="code-block">
+                            <pre><code>smssh help
+smlog help
+smpass help
+smnet help
+smdb help</code></pre>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="install-extra reveal">
-                <p class="section-text">Для мониторинга SSH через systemd:</p>
-                <div class="install-code-wrap">
-                    <pre class="install-code"><code>sudo make install-systemd
+                <div class="install-extra">
+                    <div class="install-extra-card">
+                        <h4>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 3V21" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            GUI интерфейс
+                        </h4>
+                        <div class="code-block">
+                            <pre><code>make gui
+sudo make install-gui
+asmu-gui</code></pre>
+                        </div>
+                    </div>
+                    <div class="install-extra-card">
+                        <h4>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Systemd мониторинг
+                        </h4>
+                        <div class="code-block">
+                            <pre><code>sudo make install-systemd
 systemctl enable smssh
 systemctl start smssh</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>
-            <span class="footer-brand">ASMU</span> Advanced Security Manager Utils ·
-            <a href="https://github.com/Tosa5656/asmu" target="_blank" rel="noopener">GitHub</a> ·
-            <a href="https://github.com/Tosa5656/asmu/tree/master/doc" target="_blank" rel="noopener">Документация</a> ·
-            <a href="https://github.com/Tosa5656/asmu/tree/master/api" target="_blank" rel="noopener">API</a> ·
-            GPL-3.0
-        </p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="4" y="4" width="24" height="24" rx="6" stroke="url(#footer-gradient)" stroke-width="2"/>
+                            <path d="M12 16L15 19L20 13" stroke="url(#footer-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="footer-gradient" x1="4" y1="4" x2="28" y2="28">
+                                    <stop offset="0%" stop-color="#00d9ff"/>
+                                    <stop offset="100%" stop-color="#7b2ff7"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>ASMU</span>
+                    </div>
+                    <p>Advanced Security Manager Utils для администраторов Linux</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/Tosa5656/asmu" target="_blank" rel="noopener" aria-label="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Проект</h4>
+                    <ul>
+                        <li><a href="#features">Возможности</a></li>
+                        <li><a href="#tools">Утилиты</a></li>
+                        <li><a href="#stats">Статистика</a></li>
+                        <li><a href="#install">Установка</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Ресурсы</h4>
+                    <ul>
+                        <li><a href="https://github.com/Tosa5656/asmu" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Tosa5656/asmu/tree/master/api" target="_blank" rel="noopener">API</a></li>
+                        <li><a href="https://github.com/Tosa5656/asmu/tree/master/doc" target="_blank" rel="noopener">Документация</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Утилиты</h4>
+                    <ul>
+                        <li><a href="#tools">smssh</a></li>
+                        <li><a href="#tools">smlog</a></li>
+                        <li><a href="#tools">smpass</a></li>
+                        <li><a href="#tools">smnet</a></li>
+                        <li><a href="#tools">smdb</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASMU Project. Лицензия GPL-3.0</p>
+                <p>Создано с ❤️ для администраторов Linux</p>
+            </div>
+        </div>
     </footer>
 
-    <a href="#" class="back-top" id="back-top" aria-label="Наверх">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 4L4 10h3v6h6v-6h3L10 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Наверх">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </a>
 

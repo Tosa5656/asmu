@@ -2,7 +2,7 @@ CC=g++
 CFLAGS = -std=c++20 -Wall -Werror
 LDFLAGS = -lstdc++ -lssl -lcrypto -lpcap -lmaxminddb
 
-all: smpass smnet smlog smssh smdb libasmu.a
+all: smpass smnet smlog smssh smdb libasmu.a gui
 
 smpass: obj/argsparser.o obj/smpass.o obj/smstorage.o obj/logger.o
 	@mkdir -p bin
@@ -23,6 +23,11 @@ smssh: obj/smssh.o obj/sshconfig.o obj/sshattdetector.o obj/logger.o
 smdb: obj/smdb.o obj/logger.o
 	@mkdir -p bin
 	$(CC) $(CFLAGS) $(LDFLAGS) -Ismdb -Ilogger obj/smdb.o obj/logger.o -o bin/smdb
+
+gui: libasmu.a
+	@echo "Сборка графического интерфейса ASMU..."
+	@cd gui && qmake asmu-gui.pro && make
+	@echo "GUI собран: gui/asmu-gui"
 
 libasmu.a: obj/smpass_api.o obj/smnet_api.o obj/smlog_api.o obj/smssh_api.o obj/smdb_api.o obj/asmu.o obj/logger.o obj/argsparser.o obj/smstorage.o obj/smnet.o obj/systemlogger.o obj/sshconfig.o obj/sshattdetector.o
 	@echo "Сборка библиотеки API ASMU..."
@@ -100,8 +105,11 @@ obj/logger.o:
 clean:
 	rm -rf obj
 	rm -rf bin
+	@cd gui && make clean 2>/dev/null || true
+	@rm -f gui/Makefile gui/.qmake.stash 2>/dev/null || true
+	@rm -rf gui/obj 2>/dev/null || true
 
-install: all install-geolite install-systemd install-doc
+install: all install-geolite install-systemd install-doc install-gui
 	@if [ "$(shell id -u)" != "0" ]; then \
 		echo "Ошибка: для установки требуются root права"; \
 		exit 1; \
@@ -121,10 +129,34 @@ install: all install-geolite install-systemd install-doc
 	@echo "  smlog help                    - анализ системных логов"
 	@echo "  smpass help                   - хранение паролей"
 	@echo "  smnet help                    - мониторинг сети"
+	@echo "  asmu-gui                      - графический интерфейс"
 	@echo ""
 	@echo "Для запуска мониторинга SSH-атак:"
 	@echo "  systemctl enable smssh"
 	@echo "  systemctl start smssh"
+	@echo "Установка ASMU успешно завершена!"
+	@echo ""
+	@echo "Примеры использования:"
+	@echo "  smssh help                    - безопасность SSH"
+	@echo "  smlog help                    - анализ системных логов"
+	@echo "  smpass help                   - хранение паролей"
+	@echo "  smnet help                    - мониторинг сети"
+	@echo ""
+	@echo "Для запуска мониторинга SSH-атак:"
+	@echo "  systemctl enable smssh"
+	@echo "  systemctl start smssh"
+
+install-gui: gui
+	@if [ "$(shell id -u)" != "0" ]; then \
+		echo "Ошибка: для установки GUI требуются root права"; \
+		exit 1; \
+	fi
+	@echo "Установка ASMU GUI..."
+	@install -d /usr/local/bin
+	@install -m 755 gui/asmu-gui /usr/local/bin/
+	@install -d /usr/share/applications
+	@install -m 644 gui/asmu-gui.desktop /usr/share/applications/
+	@echo "GUI установлен в /usr/local/bin/asmu-gui"
 
 install-geolite:
 	@if [ "$(shell id -u)" != "0" ]; then \
@@ -203,6 +235,8 @@ uninstall:
 	@rm -f /usr/local/bin/smlog
 	@rm -f /usr/local/bin/smssh
 	@rm -f /usr/local/bin/smdb
+	@rm -f /usr/local/bin/asmu-gui
+	@rm -f /usr/share/applications/asmu-gui.desktop
 	@echo "Утилиты удалены из /usr/local/bin/"
 	@rm -rf /usr/share/doc/asmu
 	@echo "Документация удалена из /usr/share/doc/asmu/"
@@ -271,4 +305,4 @@ check: all
 	@echo "Все основные тесты пройдены успешно."
 	@echo "   ASMU готов к использованию."
 
-.PHONY: install install-geolite install-systemd install-doc install-doc-only uninstall clean check smdb doc
+.PHONY: install install-geolite install-systemd install-doc install-doc-only install-gui uninstall clean check smdb doc gui

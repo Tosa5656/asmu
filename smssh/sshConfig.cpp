@@ -2,7 +2,7 @@
  * @file sshConfig.cpp
  * @brief Реализация управления конфигурацией SSH
  * @author Tosa5656
- * @date 4 января, 2026
+ * @date 1 марта, 2026
  */
 
 #include "sshConfig.h"

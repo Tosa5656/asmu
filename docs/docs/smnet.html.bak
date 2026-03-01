@@ -4,52 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>smnet — ASMU Docs</title>
-    <meta name="description" content="Документация smnet - утилита для сканирования портов, мониторинга сети и анализа трафика">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">☰</button>
+    <button type="button" class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Меню">≡</button>
     <div class="docs-nav-overlay" id="docs-nav-overlay"></div>
     <nav class="docs-nav" id="docs-nav">
-        <a href="../index.html" class="logo">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect x="4" y="4" width="24" height="24" rx="6" stroke="url(#logo-gradient)" stroke-width="2"/>
-                <path d="M12 16L15 19L20 13" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <defs>
-                    <linearGradient id="logo-gradient" x1="4" y1="4" x2="28" y2="28">
-                        <stop offset="0%" stop-color="#00d9ff"/>
-                        <stop offset="100%" stop-color="#7b2ff7"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-            ASMU
-        </a>
-        <a href="../index.html" style="display: inline-block; margin: 0 1.5rem 1rem; padding: 0.5rem 1rem; background: rgba(0, 217, 255, 0.1); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 8px; color: #00d9ff; text-decoration: none; font-size: 0.875rem; font-weight: 600;">← Главная</a>
+        <a href="../index.html" class="logo">ASMU</a>
+        <a href="index.html" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Документация</a>
         <div class="nav-section">Обзор</div>
         <ul>
             <li><a href="index.html">Введение</a></li>
             <li><a href="architecture.html">Архитектура</a></li>
         </ul>
-        <div class="nav-section">Утилиты</div>
+        <div class="nav-section">Модули</div>
         <ul>
-            <li><a href="smssh.html">smssh — SSH Security</a></li>
-            <li><a href="smlog.html">smlog — Log Analysis</a></li>
-            <li><a href="smpass.html">smpass — Password Manager</a></li>
-            <li><a href="smnet.html" class="active">smnet — Network Monitor</a></li>
-            <li><a href="smdb.html">smdb — MITRE ATT&amp;CK</a></li>
+            <li><a href="smssh.html">smssh</a></li>
+            <li><a href="smlog.html">smlog</a></li>
+            <li><a href="smpass.html">smpass</a></li>
+            <li><a href="smnet.html">smnet</a></li>
+            <li><a href="smdb.html">smdb</a></li>
         </ul>
-        <div class="nav-section">Разработка</div>
+        <div class="nav-section">Общее</div>
         <ul>
-            <li><a href="common.html">Общие компоненты</a></li>
+            <li><a href="common.html">logger, argsparser</a></li>
+        </ul>
+        <div class="nav-section">API</div>
+        <ul>
             <li><a href="api.html">C++ API</a></li>
         </ul>
-        <div class="nav-section">Справочник</div>
+        <div class="nav-section">Разделы</div>
         <ul>
-            <li><a href="attacks/index.html">Атаки MITRE ATT&amp;CK</a></li>
+            <li><a href="attacks/index.html">Атаки MITRE ATT&CK</a></li>
         </ul>
     </nav>
     <main class="docs-main">

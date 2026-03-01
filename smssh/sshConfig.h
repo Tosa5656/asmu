@@ -2,7 +2,7 @@
  * @file sshConfig.h
  * @brief Управление конфигурацией SSH и анализ безопасности
  * @author Tosa5656
- * @date 4 января, 2026
+ * @date 1 марта, 2026
  */
 
 #pragma once

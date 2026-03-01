@@ -1,3 +1,10 @@
+/**
+ * @file SystemLogger.cpp
+ * @brief Реализация продвинутой системы логирования и мониторинга
+ * @author Tosa5656
+ * @date 4 января, 2026
+ */
+
 #include "SystemLogger.h"
 #include <sys/stat.h>
 #include <unistd.h>

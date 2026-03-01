@@ -2,6 +2,8 @@
 
 **Advanced Security Manager Utils** — набор утилит для администраторов Linux: мониторинг, анализ и усиление безопасности без лишней магии.
 
+Доступен как в виде консольных утилит, так и с графическим интерфейсом на Qt.
+
 [![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/Tosa5656/asmu)
 [![Stars](https://img.shields.io/github/stars/Tosa5656/asmu?style=flat&logo=GitHub&color=blue)](https://github.com/Tosa5656/asmu/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Tosa5656/asmu/blob/master/LICENSE.md)
@@ -127,6 +129,20 @@ smdb tools T1078
 ```
 
 Документация по атакам лежит в `doc/attacks/` (HTML). При установке — в `/usr/share/doc/asmu/attacks/`.
+
+---
+
+## GUI
+
+Графический интерфейс для всех утилит ASMU на Qt5/Qt6.
+
+```bash
+make gui              # собрать GUI
+sudo make install-gui # установить GUI
+asmu-gui              # запустить
+```
+
+Подробности в [gui/README.md](gui/README.md).
 
 ---
 
